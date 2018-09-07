@@ -8,17 +8,24 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 06 Sep 2018 21:50:56 GMT</pubDate>
+    <pubDate>Fri, 07 Sep 2018 00:06:19 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>first-post</title>
+      <title>My Hello World</title>
       <link>http://jmiguelr.github.io/2018/09/06/first-post/</link>
       <guid>http://jmiguelr.github.io/2018/09/06/first-post/</guid>
       <pubDate>Thu, 06 Sep 2018 21:50:56 GMT</pubDate>
       <description>
       
+        
+        
+          
+        
+      
       </description>
+      
+      <content:encoded><![CDATA[<p>Welcome to my brand new blog!. </p><p>As I pretend to write in english about technologies I use, I cannot imagine a better way to start:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> _   _      _ _        __        __         _     _ </span><br><span class="line">| | | | ___| | | ___   \ \      / /__  _ __| | __| |</span><br><span class="line">| |_| |/ _ \ | |/ _ \   \ \ /\ / / _ \| &apos;__| |/ _` |</span><br><span class="line">|  _  |  __/ | | (_) |   \ V  V / (_) | |  | | (_| |</span><br><span class="line">|_| |_|\___|_|_|\___/     \_/\_/ \___/|_|  |_|\__,_|</span><br></pre></td></tr></table></figure><h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer:"></a>Disclaimer:</h3><p>I’m a non-english speaker. My spoken english is far to be fluent but I think I can make a good job trying to write it. And it should improve on future, as it’s part of what I want ot do with this new blog. </p><h3 id="What-can-you-find-here"><a href="#What-can-you-find-here" class="headerlink" title="What can you find here?"></a>What can you find here?</h3><p>I’ve been programmer (gwBasic, Clipper, Visual Basic, Perl, Java, Groovy) and systems analyst (or SysOp, SysAdmin, BOFH or whatever you want) since 1985. So I’ll write to whatever I find interesting but always related to technical questions. I have <a href="https://blog.jmiguel.eu" target="_blank" rel="noopener">other blog</a> for personal questions and for some time (maybe some day…) I had another one for aviation information: <a href="http://www.aerotrastornados.com" target="_blank" rel="noopener">aerotrastornados.com</a></p><h3 id="Tagging"><a href="#Tagging" class="headerlink" title="Tagging"></a>Tagging</h3><p>All posts will have some tags. First for language [eng <strong>|</strong> esp]. Next for topic, and I’ll try to keep the list as short as possible: [programming <strong>|</strong> systems <strong>|</strong> java <strong>|</strong> groovy <strong>|</strong> grails <strong>|</strong> linux]</p><p>No more to write right now. Just let’s see if I can publish it without further problems before start customization, fonts, images and so on. </p>]]></content:encoded>
       
       <comments>http://jmiguelr.github.io/2018/09/06/first-post/#disqus_thread</comments>
     </item>
