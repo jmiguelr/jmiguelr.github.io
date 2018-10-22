@@ -5,20 +5,20 @@
   
 
   
-  <title>Show block id on Linux devices | Tech Thoughts</title>
+  <title>Several submit actions in one form | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="This is the kind of things I have to seach everytime I need to install a new drive on a computer. As this is the kind of things I don’t do everyday, I forget it.  So… How list the devices IDs on a Lin">
-<meta name="keywords" content="eng,linux">
+  <meta name="description" content="Sometimes you need to have several actions to be submitted on the same form. Usually you only have one button for this which points to the place you define on the FORM ACTION block.So, how can you det">
+<meta name="keywords" content="eng,html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Show block id on Linux devices">
-<meta property="og:url" content="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/index.html">
+<meta property="og:title" content="Several submit actions in one form">
+<meta property="og:url" content="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
-<meta property="og:description" content="This is the kind of things I have to seach everytime I need to install a new drive on a computer. As this is the kind of things I don’t do everyday, I forget it.  So… How list the devices IDs on a Lin">
+<meta property="og:description" content="Sometimes you need to have several actions to be submitted on the same form. Usually you only have one button for this which points to the place you define on the FORM ACTION block.So, how can you det">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-09-18T09:05:16.832Z">
+<meta property="og:updated_time" content="2018-10-22T20:26:07.460Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Show block id on Linux devices">
-<meta name="twitter:description" content="This is the kind of things I have to seach everytime I need to install a new drive on a computer. As this is the kind of things I don’t do everyday, I forget it.  So… How list the devices IDs on a Lin">
+<meta name="twitter:title" content="Several submit actions in one form">
+<meta name="twitter:description" content="Sometimes you need to have several actions to be submitted on the same form. Usually you only have one button for this which points to the place you define on the FORM ACTION block.So, how can you det">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -70,10 +70,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Show-block-id-on-Linux-devices" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Several-submit-actions-in-one-form" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/09/18/Show-block-id-on-Linux-devices/" class="article-date">
-  <time datetime="2018-09-18T09:01:27.000Z" itemprop="datePublished">2018-09-18</time>
+    <a href="/2018/10/22/Several-submit-actions-in-one-form/" class="article-date">
+  <time datetime="2018-10-22T20:18:58.000Z" itemprop="datePublished">2018-10-22</time>
 </a>
     
   </div>
@@ -84,7 +84,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Show block id on Linux devices
+      Several submit actions in one form
     </h1>
   
 
@@ -92,17 +92,18 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>This is the kind of things I have to seach everytime I need to install a new drive on a computer. As this is the kind of things I don’t do everyday, I forget it. </p>
-<p>So… How list the devices IDs on a Linux system?. Just like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@caronte:~# blkid</span><br><span class="line">/dev/sda1: UUID=&quot;d5a0a58e-13bc-46bb-b106-de5219dd7259&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;92e8992d-01&quot;</span><br><span class="line">/dev/sda2: UUID=&quot;14fa763f-0861-41c3-ba52-ce25e94e009a&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;92e8992d-02&quot;</span><br><span class="line">/dev/sdb1: UUID=&quot;5bd7c629-74af-4714-b3f6-34bab7a988b0&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;dd4daff0-c29a-4489-ab93-06e3929e2cad&quot;</span><br><span class="line">/dev/sdc1: UUID=&quot;42123f82-e997-46b6-9dc7-d1d7f521379f&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;151b9380-01&quot;</span><br></pre></td></tr></table></figure>
+        <p>Sometimes you need to have several actions to be submitted on the same form. Usually you only have one button for this which points to the place you define on the <code>FORM ACTION</code> block.<br>So, how can you detect which button was clicked in plain HTML?</p>
+<p>You can use the <code>value</code> variable on button, this way:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;FORM METHOD=&quot;whatever&quot; ACTION=&quot;/your/endPoint/&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;accept&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Accept 1&lt;/button&gt;&quot;</span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;dontAccept&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Dont Accept&lt;/button&gt;&quot;</span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;maybe&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Maybe Accept&lt;/button&gt;&quot;</span><br></pre></td></tr></table></figure>
+<p>And in your code just check the <code>btnAction</code> parameter variable for <code>accept</code>, <code>dontAccept</code> or <code>maybe</code> values.  Easy!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjnkr5vsp0002os9jcbafhqde" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjnkr5vsk0001os9jqy3jzv6y" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
 
     </footer>
   </div>
@@ -110,19 +111,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/10/22/Several-submit-actions-in-one-form/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Several submit actions in one form
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/09/06/first-post/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/09/18/Show-block-id-on-Linux-devices/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">My Hello World</div>
+      <div class="article-nav-title">Show block id on Linux devices</div>
     </a>
   
 </nav>
