@@ -1102,6 +1102,10 @@ a.article-title:hover {
   overflow: auto;
   color: #ccc;
   line-height: 22.400000000000002px;
+  border-radius: 3px;
+  background: #333;
+  margin: 1px 10px 1px 10px;
+  border: 3px solid #eee;
 }
 .article-entry .highlight .gutter pre,
 .article-entry .gist .gist-file .gist-data .line-numbers {
