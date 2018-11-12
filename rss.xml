@@ -8,8 +8,27 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 22 Oct 2018 20:26:07 GMT</pubDate>
+    <pubDate>Mon, 12 Nov 2018 15:06:46 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Error actualizando docker (mint 18)</title>
+      <link>http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/</link>
+      <guid>http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/</guid>
+      <pubDate>Mon, 12 Nov 2018 14:58:40 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>Hoy, actualizando el sistema desde el entorno gráfico, me ha salido un error de un paquete que no podía actualizar. El sistema me sugería que buscara cual era el paquete que daba problemas usando el filtro <em>rotos</em> .  Tras maldecirme por hacer estas cosas en el entorno gráfico en lugar de la consola, he ejecutado <code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code> desde la consola para ver que es lo que estaba pasando realmente.</p><p>El resultado era:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Los siguientes paquetes tienen dependencias incumplidas:</span><br><span class="line"> docker-ce : Depende: containerd.io pero no está instalado</span><br><span class="line">E: Dependencias incumplidas. Pruebe de nuevo utilizando -f.</span><br><span class="line">jmiguel@mab ~  $ sudo apt-get -f install</span><br><span class="line">Leyendo lista de paquetes... Hecho</span><br><span class="line">Creando árbol de dependencias</span><br><span class="line">Leyendo la información de estado... Hecho</span><br><span class="line">Corrigiendo dependencias... Listo</span><br><span class="line">Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.</span><br><span class="line">  libjs-openlayers libwireshark8 libwiretap6 libwscodecs1 libwsutil7</span><br><span class="line">Utilice «sudo apt autoremove» para eliminarlos.</span><br><span class="line">Se instalarán los siguientes paquetes adicionales:</span><br><span class="line">  containerd.io</span><br><span class="line">Se instalarán los siguientes paquetes NUEVOS:</span><br><span class="line">  containerd.io</span><br><span class="line">0 actualizados, 1 nuevos se instalarán, 0 para eliminar y 0 no actualizados.</span><br><span class="line">1 no instalados del todo o eliminados.</span><br><span class="line">Se necesita descargar 0 B/19,9 MB de archivos.</span><br><span class="line">Se utilizarán 87,6 MB de espacio de disco adicional después de esta operación.</span><br><span class="line">¿Desea continuar? [S/n] S</span><br><span class="line">(Leyendo la base de datos ... 523472 ficheros o directorios instalados actualmente.)</span><br><span class="line">Preparando para desempaquetar .../containerd.io_1.2.0-1_amd64.deb ...</span><br><span class="line">Desempaquetando containerd.io (1.2.0-1) ...</span><br><span class="line">dpkg: error al procesar el archivo /var/cache/apt/archives/containerd.io_1.2.0-1_amd64.deb (--unpack):</span><br><span class="line"> intentando sobreescribir `/usr/sbin/runc&apos;, que está también en el paquete runc 1.0.0~rc2+docker1.13.1-0ubuntu1~16.04.1</span><br><span class="line">dpkg-deb: error: el subproceso copiado fue terminado por la señal (Broken pipe)</span><br><span class="line">Se encontraron errores al procesar:</span><br><span class="line"> /var/cache/apt/archives/containerd.io_1.2.0-1_amd64.deb</span><br></pre></td></tr></table></figure><p>Parece que había algun problema con la actulizacion de docker. He probado a parar docker antes de actualizar pero el resultado era el mismo, asi que la solución ha sido desinstalar <code>docker-ce</code> y  <code>runc</code> , que parece ser antiguo y estar obsoleto.</p><p>Asi que tras ejecutar:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker-ce</span><br><span class="line">sudo apt-get remove runc</span><br><span class="line">sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure><p>Todo ha vuelto a la normalidad.</p><p>Espero que a alguien le sirva :-)</p>]]></content:encoded>
+      
+      <comments>http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Several submit actions in one form</title>
