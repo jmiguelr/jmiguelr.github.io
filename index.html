@@ -69,6 +69,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Convert-file-encoding-bulk-way" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/Convert-file-encoding-bulk-way/" class="article-date">
+  <time datetime="2018-11-20T11:36:45.000Z" itemprop="datePublished">2018-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/20/Convert-file-encoding-bulk-way/">Convert file encoding, bulk way</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almost 10 years later -yep that is a really <strong>legacy</strong> project-) we’re updating it, mostly in the frontend user interface.</p>
+<p>So, when we started working with it he have a mix of old ISO-8859-1 files and new UTF-8 and in one point we decided to change all encoding to UTF-8. We made some changes using the IntelliJ features for this purpose but it was clear we needed some automatized way to do it, and this is the one-liner way we used:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -name &quot;*.java&quot; -exec file &#123;&#125; \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; do iconv -f ISO-8859-1 -t UTF-8 &lt; $a &gt; /tmp/tmp ; &quot;mv&quot; /tmp/tmp $a ; done</span><br></pre></td></tr></table></figure>
+<p>So read it as follows:</p>
+<p>“Find all java files, check which of them are encoded as <em>ISO-whatever</em> and for all of them use the <code>iconv</code> command to create a new correctly encoded file as <code>/tmp/tmp</code> and then move it to the original location”</p>
+<p>Of course: change the <em>“.java”</em> for whatever you need, and maybe it’s a good idea to run it in several steps to see what’s happening.</p>
+<p>Run first just the <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO</code> , then something like <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; echo &quot;gonna work with $a&quot; ; done</code> so you can be sure you don’t break anything (make a backup first!)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjopoj3mp00015x9jcejf8ie4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Error-actualizando-docker-mint-18" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/12/Error-actualizando-docker-mint-18/" class="article-date">
@@ -103,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjoeki2hl0001pt9jwilou9wn" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjopoj3mu00025x9jyu246kox" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -145,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjoeki2hp0002pt9jyll2bg9f" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjopoj3mx00045x9j8pqfegnc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -186,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjoeki2ht0004pt9jvw67ateb" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjopoj3n100055x9j6a9qyu5o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -231,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjoeki2hx0005pt9jxil436sb" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjopoj3n200065x9jzfkq7j0p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
@@ -286,6 +331,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/11/20/Convert-file-encoding-bulk-way/">Convert file encoding, bulk way</a>
+          </li>
         
           <li>
             <a href="/2018/11/12/Error-actualizando-docker-mint-18/">Error actualizando docker (mint 18)</a>

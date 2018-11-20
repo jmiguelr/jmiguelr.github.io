@@ -5,15 +5,20 @@
   
 
   
-  <title>Tag: esp | Tech Thoughts</title>
+  <title>Convert file encoding, bulk way | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tech Thoughts">
-<meta property="og:url" content="http://jmiguelr.github.io/tags/esp/index.html">
+  <meta name="description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
+<meta name="keywords" content="eng,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Convert file encoding, bulk way">
+<meta property="og:url" content="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
+<meta property="og:description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-11-20T11:51:57.245Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tech Thoughts">
+<meta name="twitter:title" content="Convert file encoding, bulk way">
+<meta name="twitter:description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -67,40 +72,60 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/12/Error-actualizando-docker-mint-18/" class="archive-article-date">
-  <time datetime="2018-11-12T14:58:40.000Z" itemprop="datePublished">Nov 12</time>
+        <section id="main"><article id="post-Convert-file-encoding-bulk-way" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/20/Convert-file-encoding-bulk-way/" class="article-date">
+  <time datetime="2018-11-20T11:36:45.000Z" itemprop="datePublished">2018-11-20</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/12/Error-actualizando-docker-mint-18/">Error actualizando docker (mint 18)</a>
+    <h1 class="article-title" itemprop="name">
+      Convert file encoding, bulk way
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almost 10 years later -yep that is a really <strong>legacy</strong> project-) we’re updating it, mostly in the frontend user interface.</p>
+<p>So, when we started working with it he have a mix of old ISO-8859-1 files and new UTF-8 and in one point we decided to change all encoding to UTF-8. We made some changes using the IntelliJ features for this purpose but it was clear we needed some automatized way to do it, and this is the one-liner way we used:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -name &quot;*.java&quot; -exec file &#123;&#125; \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; do iconv -f ISO-8859-1 -t UTF-8 &lt; $a &gt; /tmp/tmp ; &quot;mv&quot; /tmp/tmp $a ; done</span><br></pre></td></tr></table></figure>
+<p>So read it as follows:</p>
+<p>“Find all java files, check which of them are encoded as <em>ISO-whatever</em> and for all of them use the <code>iconv</code> command to create a new correctly encoded file as <code>/tmp/tmp</code> and then move it to the original location”</p>
+<p>Of course: change the <em>“.java”</em> for whatever you need, and maybe it’s a good idea to run it in several steps to see what’s happening.</p>
+<p>Run first just the <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO</code> , then something like <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; echo &quot;gonna work with $a&quot; ; done</code> so you can be sure you don’t break anything (make a backup first!)</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjopoj3mp00015x9jcejf8ie4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/11/12/Error-actualizando-docker-mint-18/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Error actualizando docker (mint 18)</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         
