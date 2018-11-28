@@ -69,6 +69,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Undo-a-pushed-commit-on-git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" class="article-date">
+  <time datetime="2018-11-28T10:08:49.000Z" itemprop="datePublished">2018-11-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/28/Undo-a-pushed-commit-on-git/">Undo a pushed commit on git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>We all know it. Shit happens.</p>
+<p>Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what was going wrong but the reality was that something was broken so I decided to go back in time.</p>
+<p>The commits (2 commits) was already pushed to our bitbucket and tried several approaches. I created a detached branch, modify and commit. No success. Then I tried some of features IntelliJ gaves me, but I could find a good one.</p>
+<p>So finally I found (<a href="https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener">Stackoverflow at rescue</a>) this solution which help <strong>in my case</strong>.  Be careful: my problem may be different than yours and so the solution. Even more, the solution I used it’s not the choosen on previous link.</p>
+<p>I had the following git history</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">commit 2071cf3cb8974ed6cb738fa8fe3e649ad42fed49</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:16:48 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 5ff2c4a3a112c821b78cd6a55ed7ae58790b8c3e</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:11:06 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 3a37cbc8e7578edf5450443993bc8258d42d0a7b</span><br><span class="line">Author: yyyyy</span><br><span class="line">Date:   Wed Nov 28 09:58:33 2018 +0100</span><br></pre></td></tr></table></figure>
+<p>The two top commits was mine, and was wrong. I wanted to go back to 3a37cbc so I use the following sequence:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Resets index to former commit; replace &apos;3a37cbc8e7578edf5450443993bc8258d42d0a7b&apos; with your commit code</span><br><span class="line">git reset 3a37cbc8e7578edf5450443993bc8258d42d0a7b</span><br><span class="line"></span><br><span class="line"># Moves pointer back to previous HEAD</span><br><span class="line">git reset --soft HEAD@&#123;1&#125;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;Revert commit to the past&quot;</span><br><span class="line"></span><br><span class="line"># Updates working copy to reflect the new commit</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+<p>Here is the point where you’re back to the commit you wanted to be. Check it. If you’re satisfied, just push it.</p>
+<p>And additional benefit with this approach is that you don’t loose your history: there will be ever a culprit (myself, in this case) written on the chain.</p>
+<p>Hope this helps.</p>
+<p>(*) PS: Of course, the blame on SonarLint it’s just a joke. The fault was mine :-)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjp10zq3s0006ot9jau9k7t2t" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Convert-file-encoding-bulk-way" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/20/Convert-file-encoding-bulk-way/" class="article-date">
@@ -102,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjopomm0l0001ql9jtq1ufhh0" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjp10zq3l0001ot9jycokdgbx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -148,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjopomm0o0002ql9jjyauoqud" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjp10zq3n0002ot9jaj6r5gch" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -190,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjopomm0s0004ql9j46owg8as" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjp10zq3q0004ot9jpnuikolt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -231,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjopomm0y0006ql9jc0bgvk1r" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjp10zq3r0005ot9j5vyr964e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -276,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjopomm0w0005ql9ju5ub86od" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjp10zq3t0008ot9jmtz0ucip" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
@@ -301,7 +351,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li></ul>
     </div>
   </div>
 
@@ -311,7 +361,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/eng/" style="font-size: 20px;">eng</a> <a href="/tags/esp/" style="font-size: 10px;">esp</a> <a href="/tags/general/" style="font-size: 10px;">general</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a>
+      <a href="/tags/docker/" style="font-size: 10px;">docker</a> <a href="/tags/eng/" style="font-size: 20px;">eng</a> <a href="/tags/esp/" style="font-size: 10px;">esp</a> <a href="/tags/general/" style="font-size: 10px;">general</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/linux/" style="font-size: 15px;">linux</a>
     </div>
   </div>
 
@@ -333,6 +383,10 @@
       <ul>
         
           <li>
+            <a href="/2018/11/28/Undo-a-pushed-commit-on-git/">Undo a pushed commit on git</a>
+          </li>
+        
+          <li>
             <a href="/2018/11/20/Convert-file-encoding-bulk-way/">Convert file encoding, bulk way</a>
           </li>
         
@@ -346,10 +400,6 @@
         
           <li>
             <a href="/2018/09/18/Show-block-id-on-Linux-devices/">Show block id on Linux devices</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/06/first-post/">My Hello World</a>
           </li>
         
       </ul>
