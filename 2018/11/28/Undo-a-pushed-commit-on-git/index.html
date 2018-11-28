@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="Tech Thoughts">
 <meta property="og:description" content="We all know it. Shit happens. Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-28T10:26:05.954Z">
+<meta property="og:updated_time" content="2018-11-28T10:29:07.319Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Undo a pushed commit on git">
 <meta name="twitter:description" content="We all know it. Shit happens. Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what">
@@ -97,7 +97,7 @@
         <p>We all know it. Shit happens.</p>
 <p>Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what was going wrong but the reality was that something was broken so I decided to go back in time.</p>
 <p>The commits (2 commits) was already pushed to our bitbucket and tried several approaches. I created a detached branch, modify and commit. No success. Then I tried some of features IntelliJ gaves me, but I could find a good one.</p>
-<p>So finally I found (<a href="https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener">Stackoverflow at rescue</a>) this solution which help <strong>in my case</strong>.  Be careful: my problem may be different than yours and so the solution. Even more, the solution I used it’s not the choosen on previous link.</p>
+<p>So finally I found (<a href="https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener">stackoverflow at rescue</a>) this solution which help <strong>in my case</strong>.  Be careful: my problem may be different than yours and so the solution. Even more, the solution I used it’s not the choosen as the best on previous link.</p>
 <p>I had the following git history</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">commit 2071cf3cb8974ed6cb738fa8fe3e649ad42fed49</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:16:48 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 5ff2c4a3a112c821b78cd6a55ed7ae58790b8c3e</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:11:06 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 3a37cbc8e7578edf5450443993bc8258d42d0a7b</span><br><span class="line">Author: yyyyy</span><br><span class="line">Date:   Wed Nov 28 09:58:33 2018 +0100</span><br></pre></td></tr></table></figure>
 <p>The two top commits was mine, and was wrong. I wanted to go back to 3a37cbc so I use the following sequence:</p>
@@ -110,7 +110,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjp111do40006x09j9xad36on" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjp112t5u00086w9j5vl0q3mf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
