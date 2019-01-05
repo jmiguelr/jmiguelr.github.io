@@ -5,20 +5,19 @@
   
 
   
-  <title>Convert file encoding, bulk way | Tech Thoughts</title>
+  <title>Restore whole folders from Amazon S3 Glacier | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
-<meta name="keywords" content="eng,linux">
+  <meta name="description" content="Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data.  If you use it for backup, you surely knows the Glacier feature">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Convert file encoding, bulk way">
-<meta property="og:url" content="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/index.html">
+<meta property="og:title" content="Restore whole folders from Amazon S3 Glacier">
+<meta property="og:url" content="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
-<meta property="og:description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
+<meta property="og:description" content="Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data.  If you use it for backup, you surely knows the Glacier feature">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-20T11:54:35.035Z">
+<meta property="og:updated_time" content="2019-01-05T19:41:46.618Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Convert file encoding, bulk way">
-<meta name="twitter:description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
+<meta name="twitter:title" content="Restore whole folders from Amazon S3 Glacier">
+<meta name="twitter:description" content="Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data.  If you use it for backup, you surely knows the Glacier feature">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -72,10 +71,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Convert-file-encoding-bulk-way" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Restore-whole-folders-from-Amazon-S3-Glacier" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/11/20/Convert-file-encoding-bulk-way/" class="article-date">
-  <time datetime="2018-11-20T11:36:45.000Z" itemprop="datePublished">2018-11-20</time>
+    <a href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" class="article-date">
+  <time datetime="2019-01-05T19:14:31.000Z" itemprop="datePublished">2019-01-05</time>
 </a>
     
   </div>
@@ -86,7 +85,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Convert file encoding, bulk way
+      Restore whole folders from Amazon S3 Glacier
     </h1>
   
 
@@ -94,41 +93,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almost 10 years later -yep that is a really <strong>legacy</strong> project-) we’re updating it, mostly in the frontend user interface.</p>
-<p>So, when we started working with it we had a mix of old ISO-8859-1 files and new UTF-8. At some point we decided to change all files encoding to UTF-8. We made some changes using the IntelliJ features for this purpose but it was clear we needed some automatized way to do it, and this is the one-liner way we used:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -name &quot;*.java&quot; -exec file &#123;&#125; \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; do iconv -f ISO-8859-1 -t UTF-8 &lt; $a &gt; /tmp/tmp ; &quot;mv&quot; /tmp/tmp $a ; done</span><br></pre></td></tr></table></figure>
-<p>So read it as follows:</p>
-<p>“Find all java files, check which of them are encoded as <em>ISO-whatever</em> and for all of them use the <code>iconv</code> command to create a new correctly encoded file as <code>/tmp/tmp</code> and then move it to the original location”</p>
-<p>Of course: change the <em>“.java”</em> for whatever you need, and maybe it’s a good idea to run it in several steps to see what’s happening.</p>
-<p>Run first just the <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO</code> , then something like <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; echo &quot;gonna work with $a&quot; ; done</code> so you can be sure you don’t break anything (make a backup first!)</p>
+        <p>Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data. </p>
+<p>If you use it for backup, you surely knows the Glacier feature: you can <em>freeze</em> your data getting a lower price… in money. Because the price you pay it’s that your data ain’t available immediatly when you need it, you have to wait to <em>restore</em> it before you can get it. </p>
+<p>But a maybe worst issue is that you can’t restore a full folder. You only can restore files. So if you want to <em>un-Glacier</em> a folder you have to traverse all tree of folders, and check all individual files you want. One by one. </p>
+<p>Althougt this sounds (and it is!) weird, it’s related with the way AWS S3 <em>sees</em> your files: there are no folders. A folder it’s just a visual representation of structure of files (using / as separator). But for S3 <strong>everything</strong> is a file.</p>
+<p>Said that: I needed to restore a full directory with a lot of directories so doing the job one by one wasn’t an option. So I came to <a href="https://stackoverflow.com/questions/20033651/how-to-restore-folders-or-entire-buckets-to-amazon-s3-from-glacier" target="_blank" rel="noopener">this solution on stackOverflow</a> with credits to <a href="http://capnjosh.com/blog/a-client-error-invalidobjectstate-occurred-when-calling-the-copyobject-operation-operation-is-not-valid-for-the-source-objects-storage-class/" target="_blank" rel="noopener">this other blog post</a>. </p>
+<p>I’ve modified the script just a bit because it didn’t work for me (maybe some parameters of aws-cli have changed).  You’ll need the aws cli (Command Line Interface) to do this. </p>
+<p>First of all, we get all <em>Glaciered</em> items on a bucket (named here MYBUCKET, substite it with your own name):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3api list-objects-v2 --bucket MYBUCKET --query &quot;Contents[?StorageClass==&apos;GLACIER&apos;]&quot; --output text | awk &apos;&#123;print $2&#125;&apos; &gt; glacier-restore.txt</span><br></pre></td></tr></table></figure>
+<p>This will get a list with all objects under Glacier rules on your bucket. Maybe you don’t want all of them so this is the moment to edit the <code>glacier-restore.txt</code> file in case you want to fine-tune the files you want to get. </p>
+<p>Then, create (edit + chhmod 755) the following script which takes the content of your file an do the restore:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">for x in `cat glacier-restore.txt`</span><br><span class="line">  do</span><br><span class="line">    echo &quot;Begin restoring $x&quot;</span><br><span class="line">    aws s3api restore-object --restore-request Days=5 --bucket MYBUCKET --key &quot;$x&quot;</span><br><span class="line">    echo &quot;Done restoring $x&quot;</span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+<p>Remember: the process it’s not inmediate. With this command you instruct AWS to restore your files, but it will take between 3 and 5 hours to complete.  You can do it faster (and more expensive) but if you need it so fast you’d maybe should consider standard storage. </p>
+<p>Hope this helps!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjqjvkqrr0001kp9jfq2v70nx" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjqjvkqrw0004kp9jwf6le9u6" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Undo a pushed commit on git
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/11/12/Error-actualizando-docker-mint-18/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Error actualizando docker (mint 18)</div>
+      <div class="article-nav-title">Undo a pushed commit on git</div>
     </a>
   
 </nav>

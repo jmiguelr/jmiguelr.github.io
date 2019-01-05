@@ -69,6 +69,55 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Restore-whole-folders-from-Amazon-S3-Glacier" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" class="article-date">
+  <time datetime="2019-01-05T19:14:31.000Z" itemprop="datePublished">2019-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/">Restore whole folders from Amazon S3 Glacier</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data. </p>
+<p>If you use it for backup, you surely knows the Glacier feature: you can <em>freeze</em> your data getting a lower price… in money. Because the price you pay it’s that your data ain’t available immediatly when you need it, you have to wait to <em>restore</em> it before you can get it. </p>
+<p>But a maybe worst issue is that you can’t restore a full folder. You only can restore files. So if you want to <em>un-Glacier</em> a folder you have to traverse all tree of folders, and check all individual files you want. One by one. </p>
+<p>Althougt this sounds (and it is!) weird, it’s related with the way AWS S3 <em>sees</em> your files: there are no folders. A folder it’s just a visual representation of structure of files (using / as separator). But for S3 <strong>everything</strong> is a file.</p>
+<p>Said that: I needed to restore a full directory with a lot of directories so doing the job one by one wasn’t an option. So I came to <a href="https://stackoverflow.com/questions/20033651/how-to-restore-folders-or-entire-buckets-to-amazon-s3-from-glacier" target="_blank" rel="noopener">this solution on stackOverflow</a> with credits to <a href="http://capnjosh.com/blog/a-client-error-invalidobjectstate-occurred-when-calling-the-copyobject-operation-operation-is-not-valid-for-the-source-objects-storage-class/" target="_blank" rel="noopener">this other blog post</a>. </p>
+<p>I’ve modified the script just a bit because it didn’t work for me (maybe some parameters of aws-cli have changed).  You’ll need the aws cli (Command Line Interface) to do this. </p>
+<p>First of all, we get all <em>Glaciered</em> items on a bucket (named here MYBUCKET, substite it with your own name):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3api list-objects-v2 --bucket MYBUCKET --query &quot;Contents[?StorageClass==&apos;GLACIER&apos;]&quot; --output text | awk &apos;&#123;print $2&#125;&apos; &gt; glacier-restore.txt</span><br></pre></td></tr></table></figure>
+<p>This will get a list with all objects under Glacier rules on your bucket. Maybe you don’t want all of them so this is the moment to edit the <code>glacier-restore.txt</code> file in case you want to fine-tune the files you want to get. </p>
+<p>Then, create (edit + chhmod 755) the following script which takes the content of your file an do the restore:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">for x in `cat glacier-restore.txt`</span><br><span class="line">  do</span><br><span class="line">    echo &quot;Begin restoring $x&quot;</span><br><span class="line">    aws s3api restore-object --restore-request Days=5 --bucket MYBUCKET --key &quot;$x&quot;</span><br><span class="line">    echo &quot;Done restoring $x&quot;</span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+<p>Remember: the process it’s not inmediate. With this command you instruct AWS to restore your files, but it will take between 3 and 5 hours to complete.  You can do it faster (and more expensive) but if you need it so fast you’d maybe should consider standard storage. </p>
+<p>Hope this helps!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjqjvkqrw0004kp9jwf6le9u6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Undo-a-pushed-commit-on-git" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" class="article-date">
@@ -107,7 +156,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjqjr2cc90006o79jybhmksjp" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjqjvkqrz0008kp9juidjqs1y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -152,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjqjr2cc40001o79jq0801dja" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjqjvkqrr0001kp9jfq2v70nx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -198,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjqjr2cc50002o79ja2z6qmrc" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjqjvkqrt0002kp9jqxnrrgn5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -240,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjqjr2cc80004o79j1ppq3voi" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjqjvkqrx0005kp9jst2q6gf6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -281,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjqjr2cc90005o79jnxege30l" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjqjvkqry0006kp9jqbcgija1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -326,7 +375,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjqjr2cca0008o79jwd5q4hsv" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjqjvkqs00009kp9jrieefn45" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
@@ -370,7 +419,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -381,6 +430,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/">Restore whole folders from Amazon S3 Glacier</a>
+          </li>
         
           <li>
             <a href="/2018/11/28/Undo-a-pushed-commit-on-git/">Undo a pushed commit on git</a>
@@ -396,10 +449,6 @@
         
           <li>
             <a href="/2018/10/22/Several-submit-actions-in-one-form/">Several submit actions in one form</a>
-          </li>
-        
-          <li>
-            <a href="/2018/09/18/Show-block-id-on-Linux-devices/">Show block id on Linux devices</a>
           </li>
         
       </ul>
