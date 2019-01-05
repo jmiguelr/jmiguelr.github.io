@@ -97,7 +97,7 @@
 <p>Althougt this sounds (and it is!) weird, it’s related with the way AWS S3 <em>sees</em> your files: there are no folders. A folder it’s just a visual representation of structure of files (using / as separator). But for S3 <strong>everything</strong> is a file.</p>
 <p>Said that: I needed to restore a full directory with a lot of directories so doing the job one by one wasn’t an option. So I came to <a href="https://stackoverflow.com/questions/20033651/how-to-restore-folders-or-entire-buckets-to-amazon-s3-from-glacier" target="_blank" rel="noopener">this solution on stackOverflow</a> with credits to <a href="http://capnjosh.com/blog/a-client-error-invalidobjectstate-occurred-when-calling-the-copyobject-operation-operation-is-not-valid-for-the-source-objects-storage-class/" target="_blank" rel="noopener">this other blog post</a>. </p>
 <p>I’ve modified the script just a bit because it didn’t work for me (maybe some parameters of aws-cli have changed).  You’ll need the aws cli (Command Line Interface) to do this. </p>
-<p>First of all, we get all <em>Glaciered</em> items on a bucket (named here MYBUCKET, substite it with your own name):</p>
+<p>First of all, we get all <em>Glaciered</em> items on a bucket (named here MYBUCKET, substitute it with your own name):</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3api list-objects-v2 --bucket MYBUCKET --query &quot;Contents[?StorageClass==&apos;GLACIER&apos;]&quot; --output text | awk &apos;&#123;print $2&#125;&apos; &gt; glacier-restore.txt</span><br></pre></td></tr></table></figure>
 <p>This will get a list with all objects under Glacier rules on your bucket. Maybe you don’t want all of them so this is the moment to edit the <code>glacier-restore.txt</code> file in case you want to fine-tune the files you want to get. </p>
 <p>Then, create (edit + chhmod 755) the following script which takes the content of your file an do the restore:</p>
@@ -108,7 +108,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjqjvm4y8000uzh9je6zfxsaq" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjqjvpc9z0004dt9jsjac9xfl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -158,7 +158,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjqjvm4xq0006zh9jeovh3lo9" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjqjvpca20008dt9j4oeg1w4c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -203,7 +203,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjqjvm4xj0001zh9jpv2y112z" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjqjvpc9u0001dt9j9nfxo48e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -249,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjqjvm4xl0002zh9jet0oxbq3" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjqjvpc9w0002dt9jadyhtaso" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -291,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjqjvm4xo0004zh9j3yn3ltu8" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjqjvpca00005dt9jx6str68l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -332,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjqjvm4xp0005zh9j653mtwwe" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjqjvpca10006dt9jlu2dksj0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -377,7 +377,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjqjvm4xr0008zh9jsa7pi0r4" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjqjvpca30009dt9j28dfyldj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
