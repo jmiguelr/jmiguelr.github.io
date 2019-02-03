@@ -8,8 +8,27 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 05 Jan 2019 19:46:02 GMT</pubDate>
+    <pubDate>Sun, 03 Feb 2019 16:21:40 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>The fastest way to count columns in shell: AWK</title>
+      <link>http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/</link>
+      <guid>http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/</guid>
+      <pubDate>Sun, 03 Feb 2019 16:10:24 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>Say you have (as I do) a file <code>/tmp/myFile.txt</code> containing a list of unrelated folders with their size, as follows:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">7220    X03066659D/txt/20150109</span><br><span class="line">1365    A30266659D/txt/20150112</span><br><span class="line">9       X30626659D/txt/20150121</span><br><span class="line">0       X30663659D/xml/20150102</span><br><span class="line">5292    A30646659D/xml/20150105</span><br><span class="line">10872   X30Q66659D/xml/20150107</span><br><span class="line">7384    A30A66659D/xml/20150108</span><br></pre></td></tr></table></figure><p>And you want to sum the first column of every line to know the total. <strong>AWK</strong> at rescue!</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;&#123;sum += $1&#125; END &#123;print sum&#125; /tmp/myFile.txt&apos;</span><br></pre></td></tr></table></figure><p>If there were a discriminant you would like to use (imagine you only need those starting with <code>A</code> on second column) you can filter on AWK line (no need to grep)</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &apos;$2 ~ /^A/ &#123;sum += $1&#125; END &#123;print sum&#125;&apos; /tmp/myFile.txt</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      <comments>http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Restore whole folders from Amazon S3 Glacier</title>
