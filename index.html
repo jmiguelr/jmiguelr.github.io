@@ -69,6 +69,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Changing-hostname-on-Ubuntu-18-04-Server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" class="article-date">
+  <time datetime="2019-04-25T11:18:50.000Z" itemprop="datePublished">2019-04-25</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/">Changing hostname on Ubuntu 18.04 Server</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Coming from previous versions of Ubuntu, I’m getting some issues with the new configuration system on Ubuntu 18.04. Not sure if some of them are welcomed (to me) but…  they are there so we have no option.</p>
+<p>Few moments ago, I’ve installed a new server with Ubuntu 18 and, thinking in future, I’ve created a blueprint on VMWare I could reuse for new servers. So I’ve create a new server with basic funcionalities, upgrade it and then convert to blueprint. Obviously, I gave it a nonsense name as <em>ubuntu18</em></p>
+<p>After that, I created a virtual machine from blueprint and, you guess it, I tried to change the name.</p>
+<p>On previous versiones, I just needed to change it on <code>/etc/hosts</code> and <code>/etc/hostname</code> . That’s all. But now we need an aditional step.  You need to change on <code>/etc/cloud/cloud.cfg</code> and tell you don’t want to upgrade the hostname (I could find where it finds the original name) on every reboot. The parameter is <code>preserve_hostname</code> and you need to change the default <code>false</code> value to <code>true</code></p>
+<p>So all steps:</p>
+<ul>
+<li>Edit <code>/etc/cloud/cloud.cfg</code> and change <code>preserve_hostname: false</code> to <code>preserve_hostname: true</code></li>
+<li>Edit <code>/etc/hostname</code> and <code>/etc/hosts</code> .  On <code>hostname</code> file, just put your new name. On <code>/etc/hosts</code>, add a line like <code>127.0.1.1 myHostName</code> and <code>x.x.x.x myHostName</code> where <code>x.x.x.x</code> it’s your real IP name (if static)</li>
+</ul>
+<p>Thant’s all!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjuwkj0480001sl9j0njoaifj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Setting-clock-on-ESXi-console" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/25/Setting-clock-on-ESXi-console/" class="article-date">
@@ -104,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjuwgi9yb0005lo9jr8kawtl1" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjuwkj04f0006sl9jw9cvzxpj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esxi/">esxi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
@@ -148,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjuwgi9yf0009lo9jj4s2qap3" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjuwkj04j000asl9j0hmytbn5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -199,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjuwgi9ya0004lo9j102u547x" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjuwkj04e0005sl9j1sqbqlov" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -249,7 +295,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjuwgi9yh000clo9jqu72nts4" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjuwkj04m000csl9jb5mz06tv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -294,7 +340,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjuwgi9y50001lo9j43e7rc27" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjuwkj04b0003sl9j53pvloi1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -340,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjuwgi9y70002lo9jp6iuglam" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjuwkj04a0002sl9ja0335yew" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -382,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjuwgi9yd0006lo9j9ak9ptca" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjuwkj04g0007sl9j7ptprg8o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -423,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjuwgi9ye0008lo9j022s4kg8" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjuwkj04i0009sl9jxplexiqe" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -468,7 +514,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjuwgi9yi000elo9js7cskps2" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjuwkj04o000dsl9jph7caa03" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
@@ -525,6 +571,10 @@
       <ul>
         
           <li>
+            <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/">Changing hostname on Ubuntu 18.04 Server</a>
+          </li>
+        
+          <li>
             <a href="/2019/04/25/Setting-clock-on-ESXi-console/">Setting clock on ESXi console</a>
           </li>
         
@@ -538,10 +588,6 @@
         
           <li>
             <a href="/2018/11/28/Undo-a-pushed-commit-on-git/">Undo a pushed commit on git</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/20/Convert-file-encoding-bulk-way/">Convert file encoding, bulk way</a>
           </li>
         
       </ul>

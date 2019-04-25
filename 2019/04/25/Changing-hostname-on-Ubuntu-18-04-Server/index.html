@@ -5,15 +5,19 @@
   
 
   
-  <title>Archives: 2019/4 | Tech Thoughts</title>
+  <title>Changing hostname on Ubuntu 18.04 Server | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tech Thoughts">
-<meta property="og:url" content="http://jmiguelr.github.io/archives/2019/04/index.html">
+  <meta name="description" content="Coming from previous versions of Ubuntu, I’m getting some issues with the new configuration system on Ubuntu 18.04. Not sure if some of them are welcomed (to me) but…  they are there so we have no opt">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Changing hostname on Ubuntu 18.04 Server">
+<meta property="og:url" content="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
+<meta property="og:description" content="Coming from previous versions of Ubuntu, I’m getting some issues with the new configuration system on Ubuntu 18.04. Not sure if some of them are welcomed (to me) but…  they are there so we have no opt">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-04-25T11:32:43.267Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tech Thoughts">
+<meta name="twitter:title" content="Changing hostname on Ubuntu 18.04 Server">
+<meta name="twitter:description" content="Coming from previous versions of Ubuntu, I’m getting some issues with the new configuration system on Ubuntu 18.04. Not sure if some of them are welcomed (to me) but…  they are there so we have no opt">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -67,59 +71,61 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" class="archive-article-date">
-  <time datetime="2019-04-25T11:18:50.000Z" itemprop="datePublished">Apr 25</time>
+        <section id="main"><article id="post-Changing-hostname-on-Ubuntu-18-04-Server" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" class="article-date">
+  <time datetime="2019-04-25T11:18:50.000Z" itemprop="datePublished">2019-04-25</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/">Changing hostname on Ubuntu 18.04 Server</a>
+    <h1 class="article-title" itemprop="name">
+      Changing hostname on Ubuntu 18.04 Server
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/04/25/Setting-clock-on-ESXi-console/" class="archive-article-date">
-  <time datetime="2019-04-25T09:28:17.000Z" itemprop="datePublished">Apr 25</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/04/25/Setting-clock-on-ESXi-console/">Setting clock on ESXi console</a>
-    </h1>
-  
+        <p>Coming from previous versions of Ubuntu, I’m getting some issues with the new configuration system on Ubuntu 18.04. Not sure if some of them are welcomed (to me) but…  they are there so we have no option.</p>
+<p>Few moments ago, I’ve installed a new server with Ubuntu 18 and, thinking in future, I’ve created a blueprint on VMWare I could reuse for new servers. So I’ve create a new server with basic funcionalities, upgrade it and then convert to blueprint. Obviously, I gave it a nonsense name as <em>ubuntu18</em></p>
+<p>After that, I created a virtual machine from blueprint and, you guess it, I tried to change the name.</p>
+<p>On previous versiones, I just needed to change it on <code>/etc/hosts</code> and <code>/etc/hostname</code> . That’s all. But now we need an aditional step.  You need to change on <code>/etc/cloud/cloud.cfg</code> and tell you don’t want to upgrade the hostname (I could find where it finds the original name) on every reboot. The parameter is <code>preserve_hostname</code> and you need to change the default <code>false</code> value to <code>true</code></p>
+<p>So all steps:</p>
+<ul>
+<li>Edit <code>/etc/cloud/cloud.cfg</code> and change <code>preserve_hostname: false</code> to <code>preserve_hostname: true</code></li>
+<li>Edit <code>/etc/hostname</code> and <code>/etc/hosts</code> .  On <code>hostname</code> file, just put your new name. On <code>/etc/hosts</code>, add a line like <code>127.0.1.1 myHostName</code> and <code>x.x.x.x myHostName</code> where <code>x.x.x.x</code> it’s your real IP name (if static)</li>
+</ul>
+<p>Thant’s all!</p>
 
-    </header>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjuwkj0480001sl9j0njoaifj" class="article-share-link">Share</a>
+      
+      
+    </footer>
   </div>
-</article>
+  
+    
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2019/04/25/Setting-clock-on-ESXi-console/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Setting clock on ESXi console</div>
+    </a>
   
+</nav>
 
+  
+</article>
 
 </section>
         
