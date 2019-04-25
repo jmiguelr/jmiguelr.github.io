@@ -5,20 +5,20 @@
   
 
   
-  <title>Undo a pushed commit on git | Tech Thoughts</title>
+  <title>Setting clock on ESXi console | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="We all know it. Shit happens. Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what">
-<meta name="keywords" content="eng,git">
+  <meta name="description" content="Today I realized one of my ESXi servers had system clock way long in the future. It has no internet access so I cannot simply update it with any of the multiple time servers around the world. I though">
+<meta name="keywords" content="eng,vmware,esxi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Undo a pushed commit on git">
-<meta property="og:url" content="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/index.html">
+<meta property="og:title" content="Setting clock on ESXi console">
+<meta property="og:url" content="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
-<meta property="og:description" content="We all know it. Shit happens. Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what">
+<meta property="og:description" content="Today I realized one of my ESXi servers had system clock way long in the future. It has no internet access so I cannot simply update it with any of the multiple time servers around the world. I though">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-28T10:31:29.789Z">
+<meta property="og:updated_time" content="2019-04-25T09:39:20.557Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Undo a pushed commit on git">
-<meta name="twitter:description" content="We all know it. Shit happens. Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what">
+<meta name="twitter:title" content="Setting clock on ESXi console">
+<meta name="twitter:description" content="Today I realized one of my ESXi servers had system clock way long in the future. It has no internet access so I cannot simply update it with any of the multiple time servers around the world. I though">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -72,10 +72,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Undo-a-pushed-commit-on-git" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Setting-clock-on-ESXi-console" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" class="article-date">
-  <time datetime="2018-11-28T10:08:49.000Z" itemprop="datePublished">2018-11-28</time>
+    <a href="/2019/04/25/Setting-clock-on-ESXi-console/" class="article-date">
+  <time datetime="2019-04-25T09:28:17.000Z" itemprop="datePublished">2019-04-25</time>
 </a>
     
   </div>
@@ -86,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Undo a pushed commit on git
+      Setting clock on ESXi console
     </h1>
   
 
@@ -94,26 +94,23 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>We all know it. Shit happens.</p>
-<p>Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what was going wrong but the reality was that something was broken so I decided to go back in time.</p>
-<p>The commits (2 commits) was already pushed to our bitbucket and tried several approaches. I created a detached branch, modify and commit. No success. Then I tried some of features IntelliJ gaves me, but I could find a good one.</p>
-<p>So finally I found (<a href="https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener">stackoverflow at rescue</a>) this solution which help <strong>in my case</strong>.  Be careful: my problem may be different than yours and so the solution. Even more, the solution I used it’s not the choosen as the best on previous link.</p>
-<p>I had the following git history</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">commit 2071cf3cb8</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:16:48 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 5ff2c4a3a1</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:11:06 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 3a37cbc8e7</span><br><span class="line">Author: yyyyy</span><br><span class="line">Date:   Wed Nov 28 09:58:33 2018 +0100</span><br></pre></td></tr></table></figure>
-<p>The two top commits was mine, and was wrong. I wanted to go back to 3a37cbc8e7 so I use the following sequence:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Resets index to former commit; replace &apos;3a37cbc8e7&apos; with your commit code</span><br><span class="line">git reset 3a37cbc8e7</span><br><span class="line"></span><br><span class="line"># Moves pointer back to previous HEAD</span><br><span class="line">git reset --soft HEAD@&#123;1&#125;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;Revert commit to the past&quot;</span><br><span class="line"></span><br><span class="line"># Updates working copy to reflect the new commit</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
-<p>Here is the point where you’re back to the commit you wanted to be. Check it. If you’re satisfied, just push it.</p>
-<p>And additional benefit with this approach is that you don’t loose your history: there will be ever a culprit (myself, in this case) written on the chain.</p>
-<p>Hope this helps.</p>
-<p>(*) PS: Of course, the blame on SonarLint it’s just a joke. The fault was mine :-)</p>
+        <p>Today I realized one of my ESXi servers had system clock way long in the future. It has no internet access so I cannot simply update it with any of the multiple time servers around the world. I thought it was just a matter of simply do a <code>date -s</code> … but on ESXi console things are not usually so simpler.</p>
+<p>The right way to change time on console involves two commands, one for current date and another for setting the hardware clock so you get the right date again after reboot.  Commands are:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># esxcli system time set -?</span><br><span class="line">Usage: esxcli system time set [cmd options]</span><br><span class="line"></span><br><span class="line">Description:</span><br><span class="line">  set                   Set the system clock time. Any missing parameters will default to the current time</span><br><span class="line"></span><br><span class="line">Cmd options:</span><br><span class="line">  -d|--day=&lt;long&gt;       Day</span><br><span class="line">  -H|--hour=&lt;long&gt;      Hour</span><br><span class="line">  -m|--min=&lt;long&gt;       Minute</span><br><span class="line">  -M|--month=&lt;long&gt;     Month</span><br><span class="line">  -s|--sec=&lt;long&gt;       Second</span><br><span class="line">  -y|--year=&lt;long&gt;      Year</span><br></pre></td></tr></table></figure>
+<p>and</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esxcli hardware clock set -?</span><br></pre></td></tr></table></figure>
+<p>with the same format as above.</p>
+<p>Note the <code>Any missing parameters will default to the current time</code>, I assume seconds go to zero when setting minutes, but it’s not the case here.</p>
+<p>So, if you want to set time to 09:10:00 , current date, the right commands are:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># esxcli system time set -H 09 -m 10 -s 00  ; esxcli hardware clock set -H 09 -m 10 -s 00</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjuwgi9yh000clo9jqu72nts4" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjuwgi9yb0005lo9jr8kawtl1" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esxi/">esxi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
 
     </footer>
   </div>
@@ -121,19 +118,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Restore whole folders from Amazon S3 Glacier
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/11/20/Convert-file-encoding-bulk-way/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Convert file encoding, bulk way</div>
+      <div class="article-nav-title">The fastest way to count columns in shell: AWK</div>
     </a>
   
 </nav>

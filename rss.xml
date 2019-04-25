@@ -8,8 +8,27 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sun, 03 Feb 2019 16:21:40 GMT</pubDate>
+    <pubDate>Thu, 25 Apr 2019 09:39:20 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Setting clock on ESXi console</title>
+      <link>http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/</link>
+      <guid>http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/</guid>
+      <pubDate>Thu, 25 Apr 2019 09:28:17 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>Today I realized one of my ESXi servers had system clock way long in the future. It has no internet access so I cannot simply update it with any of the multiple time servers around the world. I thought it was just a matter of simply do a <code>date -s</code> … but on ESXi console things are not usually so simpler.</p><p>The right way to change time on console involves two commands, one for current date and another for setting the hardware clock so you get the right date again after reboot.  Commands are:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"># esxcli system time set -?</span><br><span class="line">Usage: esxcli system time set [cmd options]</span><br><span class="line"></span><br><span class="line">Description:</span><br><span class="line">  set                   Set the system clock time. Any missing parameters will default to the current time</span><br><span class="line"></span><br><span class="line">Cmd options:</span><br><span class="line">  -d|--day=&lt;long&gt;       Day</span><br><span class="line">  -H|--hour=&lt;long&gt;      Hour</span><br><span class="line">  -m|--min=&lt;long&gt;       Minute</span><br><span class="line">  -M|--month=&lt;long&gt;     Month</span><br><span class="line">  -s|--sec=&lt;long&gt;       Second</span><br><span class="line">  -y|--year=&lt;long&gt;      Year</span><br></pre></td></tr></table></figure><p>and</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">esxcli hardware clock set -?</span><br></pre></td></tr></table></figure><p>with the same format as above.</p><p>Note the <code>Any missing parameters will default to the current time</code>, I assume seconds go to zero when setting minutes, but it’s not the case here.</p><p>So, if you want to set time to 09:10:00 , current date, the right commands are:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"># esxcli system time set -H 09 -m 10 -s 00  ; esxcli hardware clock set -H 09 -m 10 -s 00</span><br></pre></td></tr></table></figure>]]></content:encoded>
+      
+      <comments>http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>The fastest way to count columns in shell: AWK</title>
