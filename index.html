@@ -69,6 +69,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Setting-default-Linux-kernel" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/05/20/Setting-default-Linux-kernel/" class="article-date">
+  <time datetime="2019-05-20T14:34:12.000Z" itemprop="datePublished">2019-05-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/05/20/Setting-default-Linux-kernel/">Setting default Linux kernel</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Sometimes we want to boot Linux with a older kernel than default. If it’s just one time, it’s a piece of cake to select it on the boot menu.</p>
+<p>Things starts to get a bit worse if you need to boot everytime with a previous version because (as it’s my case right now) you suspect there’s something that could affect performance or stability but you’re not sure.</p>
+<p>The best suited for my needs it’s telling <code>grub2</code> to remember the last kernel used. To do this you have to follow this steps:</p>
+<ul>
+<li>Keep a copy of <code>grub</code> file.  Just in case…</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/default/grub /etc/default/grub.bak</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Edit it with your favourite editor: vi, emacs, nano, joe …</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo joe /etc/default/grub</span><br></pre></td></tr></table></figure>
+<p>and change the default behaviour <code>GRUB_DEFAULT=0</code> which cause grub to choose the latest kernel with:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRUB_DEFAULT=saved</span><br><span class="line">GRUB_SAVEDEFAULT=true</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Update grub with <code>sudo update-grub</code></li>
+</ul>
+<p>Done!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="cjvwhew0u00086c9j12yjtit4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Changing-hostname-on-Ubuntu-18-04-Server" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" class="article-date">
@@ -105,9 +160,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjvwhbx2y00018e9jnsjhmliu" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjvwhew0n00016c9jv0vzwxem" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
     </footer>
   </div>
   
@@ -150,7 +207,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjvwhbx3300058e9jaxrvk58q" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjvwhew0t00066c9jaj3pdkjt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esxi/">esxi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
@@ -194,7 +251,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjvwhbx3600078e9jcx0wgbah" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjvwhew0y000e6c9jfkcv60ya" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -245,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjvwhbx3100038e9jn768j4s1" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjvwhew0s00056c9jrwjrsoy7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -295,7 +352,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjvwhbx3f000e8e9ji4wo99l0" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjvwhew13000h6c9j8x42lacc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -340,7 +397,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjvwhbx2z00028e9jkj4ab7zl" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjvwhew0p00026c9jw7f0xp5r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -386,7 +443,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjvwhbx3500068e9j1va9ugrc" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjvwhew0r00046c9jox88xkdl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -428,7 +485,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjvwhbx3700098e9jtyskstaz" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjvwhew0v00096c9jfp1aedfc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -469,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjvwhbx38000a8e9jrvhqkyo0" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjvwhew0x000c6c9j50oxywed" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -481,52 +538,12 @@
 
 
   
-    <article id="post-first-post" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/09/06/first-post/" class="article-date">
-  <time datetime="2018-09-06T21:50:56.000Z" itemprop="datePublished">2018-09-06</time>
-</a>
+
+
+  <nav id="page-nav">
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/09/06/first-post/">My Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to my brand new blog!. </p>
-<p>As I pretend to write about technologies I use, I cannot imagine a better way to start:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> _   _      _ _        __        __         _     _ </span><br><span class="line">| | | | ___| | | ___   \ \      / /__  _ __| | __| |</span><br><span class="line">| |_| |/ _ \ | |/ _ \   \ \ /\ / / _ \| &apos;__| |/ _` |</span><br><span class="line">|  _  |  __/ | | (_) |   \ V  V / (_) | |  | | (_| |</span><br><span class="line">|_| |_|\___|_|_|\___/     \_/\_/ \___/|_|  |_|\__,_|</span><br></pre></td></tr></table></figure>
-<h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer:"></a>Disclaimer:</h3><p>I’m a non-english speaker. My spoken english is far to be fluent but I think I can make a good job trying to write it. And it should improve on future, as it’s part of what I want ot do with this new blog. </p>
-<h3 id="What-can-you-find-here"><a href="#What-can-you-find-here" class="headerlink" title="What can you find here?"></a>What can you find here?</h3><p>I’ve been programmer (gwBasic, Clipper, Visual Basic, Perl, Java, Groovy) and systems analyst (or SysOp, SysAdmin, BOFH or whatever you want) since 1985. So I’ll write to whatever I find interesting but always related to technical questions. I have <a href="https://blog.jmiguel.eu" target="_blank" rel="noopener">other blog</a> for personal questions and for some time (maybe some day…) I had another one for aviation information: <a href="http://www.aerotrastornados.com" target="_blank" rel="noopener">aerotrastornados.com</a></p>
-<h3 id="Tagging"><a href="#Tagging" class="headerlink" title="Tagging"></a>Tagging</h3><p>All posts will have some tags. First for language [eng <strong>|</strong> esp]. Next for topic, and I’ll try to keep the list as short as possible: [programming <strong>|</strong> systems <strong>|</strong> java <strong>|</strong> groovy <strong>|</strong> grails <strong>|</strong> linux]</p>
-<p>No more to write right now. Just let’s see if I can publish it without further problems before start customization, fonts, images and so on. </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjvwhbx3d000c8e9jizmht752" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -558,7 +575,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -569,6 +586,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/05/20/Setting-default-Linux-kernel/">Setting default Linux kernel</a>
+          </li>
         
           <li>
             <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/">Changing hostname on Ubuntu 18.04 Server</a>
@@ -584,10 +605,6 @@
         
           <li>
             <a href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/">Restore whole folders from Amazon S3 Glacier</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/28/Undo-a-pushed-commit-on-git/">Undo a pushed commit on git</a>
           </li>
         
       </ul>
