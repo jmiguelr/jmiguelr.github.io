@@ -8,8 +8,27 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Mon, 20 May 2019 14:45:28 GMT</pubDate>
+    <pubDate>Fri, 07 Jun 2019 07:28:07 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Copy thousand of files over ssh</title>
+      <link>http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/</link>
+      <guid>http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/</guid>
+      <pubDate>Fri, 07 Jun 2019 07:01:49 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>So… you have to copy several thousand of files and folders from one server to another. And you’re short of disk space, as usual, and you want to be as efficient as possible. </p><p>You can use <code>scp -r files user@server:/...</code> but if you do it this way you’ll notice it takes forever. This is because ssh/scp open and close a the stream for every file.  So you try to zip/tar in the <em>from</em> side to copy just one file, and then uncompress on the target side after copy. But this way you need roughtly twice as space in both sides. So, what can you do?. </p><h3 id="ssh-streams-to-the-rescue"><a href="#ssh-streams-to-the-rescue" class="headerlink" title="ssh streams to the rescue"></a>ssh streams to the rescue</h3><p>Maybe you know you can execute commands over ssh. If you do <code>ssh user@host ls</code> what you get it’s the <code>ls</code> on the remote side. Also, you also know there is a underlay stream which ssh uses, for example, in ssh tunnels.</p><p>So, how can you solve the original problem with this tool?.  Easy: create a tar file (maybe ever compressed) on the fly, pipe it through ssh and un-tar it on the other side. It’s MAGIC!  :-)</p><p>Copy from out local host to a remote:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -czf - [files] | ssh user@remoteHost &quot;tar -xzvf - -C /remote/desired/folder&quot;</span><br></pre></td></tr></table></figure><p>Read it:  create (c) as usual a tar file, compressed (z), and the file it’s the standard output (-).  Pipe it thru ssh to <em>remoteHost</em>, and there, execute a tar extract (x), also with compression (z), verbose to see what’s going on (v) with the standard input (-) comming from ssh stream. Change (-C) to the desired remote folder before starting the process on the remote side. </p><p>This is, AFAIK, the best way to do the jobs. Just one step, super-fast, using compression if needed… what else?</p><p>Of course, you can also do it reverse, from server to your host:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remoteHost &quot;tar -cvf - /your/remote/folder&quot; | tar -xvf -</span><br></pre></td></tr></table></figure><p>You may even create a local tar file from remote files using this way:</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remoteHost &quot;tar -cvf - /your/remote/folder&quot; &gt; local.file.tgz</span><br></pre></td></tr></table></figure><p>Cool, isn’t it?</p>]]></content:encoded>
+      
+      <comments>http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Setting default Linux kernel</title>
