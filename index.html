@@ -92,28 +92,18 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>You may need to rename several files in a folder following a pattern.<br>Say you have </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">jmiguel@monk /tmp/a  $ touch file.1.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.2.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.3.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ ll</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x  2 jmiguel jmiguel 4096 jun 19 10:54 .</span><br><span class="line">drwxrwxrwt 28 root    root    4096 jun 19 10:54 ..</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.1.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.2.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.3.txt</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">And you want to get</span><br></pre></td></tr></table></figure>
-<p>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.1.txt<br>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.2.txt<br>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.3.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">You can do a loop, string substitution... a mess. Or you can use the `rename` command in this way:</span><br><span class="line"></span><br><span class="line">`rename &apos;s/file/ppillo/g&apos; *`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Note than rename is a shell script made with perl, so maybe it&apos;s not available on your operating system (mint and ubuntu have it) but if you have perl you can just copy and paste de following code to create your own `rename` version.</span><br></pre></td></tr></table></figure></p>
-<p>#</p>
-<p>use strict;<br>use File::Rename ();<br>use Pod::Usage;</p>
-<p>main() unless caller;</p>
-<p>sub main {<br>    my $options = File::Rename::Options::GetOptions<br>        or pod2usage;</p>
-<pre><code>mod_version() if $options-&gt;{show_version};
-pod2usage( -verbose =&gt; 2 ) if $options-&gt;{show_manual};
-pod2usage( -exitval =&gt; 1 ) if $options-&gt;{show_help};
-
-@ARGV = map {glob} @ARGV if $^O =~ m{Win}msx;
-
-File::Rename::rename(\@ARGV, $options);
-</code></pre><p>}</p>
-<p>sub mod_version {<br>    print <strong>FILE</strong> .<br>  ‘ using File::Rename version ‘.<br>        $File::Rename::VERSION .”\n\n”;<br>    exit 0<br>}   </p>
-<p>1;</p>
-<p><code>`</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">jmiguel@monk /tmp/a  $ touch file.1.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.2.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.3.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ ll</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x  2 jmiguel jmiguel 4096 jun 19 10:54 .</span><br><span class="line">drwxrwxrwt 28 root    root    4096 jun 19 10:54 ..</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.1.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.2.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.3.txt</span><br></pre></td></tr></table></figure>
+<p>And you want to get </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 newname.1.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 newname.2.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 newname.3.txt</span><br></pre></td></tr></table></figure>
+<p>You can do a loop, string substitution… a mess. Or you can use the <code>rename</code> command in this way:</p>
+<p><code>rename &#39;s/file/ppillo/g&#39; *</code></p>
+<p>Note than rename is a shell script made with perl, so maybe it’s not available on your operating system (mint and ubuntu have it) but if you have perl you can just copy and paste de following code to create your own <code>rename</code> version.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"></span><br><span class="line">use strict;</span><br><span class="line">use File::Rename ();</span><br><span class="line">use Pod::Usage;</span><br><span class="line"></span><br><span class="line">main() unless caller;</span><br><span class="line"></span><br><span class="line">sub main &#123;</span><br><span class="line">    my $options = File::Rename::Options::GetOptions</span><br><span class="line">        or pod2usage;</span><br><span class="line"></span><br><span class="line">    mod_version() if $options-&gt;&#123;show_version&#125;;</span><br><span class="line">    pod2usage( -verbose =&gt; 2 ) if $options-&gt;&#123;show_manual&#125;;</span><br><span class="line">    pod2usage( -exitval =&gt; 1 ) if $options-&gt;&#123;show_help&#125;;</span><br><span class="line"></span><br><span class="line">    @ARGV = map &#123;glob&#125; @ARGV if $^O =~ m&#123;Win&#125;msx;</span><br><span class="line"></span><br><span class="line">    File::Rename::rename(\@ARGV, $options);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sub mod_version &#123;</span><br><span class="line">    print __FILE__ .</span><br><span class="line">  &apos; using File::Rename version &apos;.</span><br><span class="line">        $File::Rename::VERSION .&quot;\n\n&quot;;</span><br><span class="line">    exit 0</span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">1;</span><br></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="cjx30fixc0001kfd9khs85bqz" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="cjx30iwum0006vpd9k824b8vq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -164,7 +154,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="cjx30fixk0008kfd9ppwmvnh5" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="cjx30iwuk0004vpd9wwdrv06y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -219,7 +209,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="cjx30fixo000ckfd9iahkjh0x" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="cjx30iwur000bvpd90swjdrp7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -267,7 +257,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjx30fixe0002kfd93tspo8i2" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjx30iwuf0001vpd9bpn10e31" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -314,7 +304,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjx30fixj0006kfd9d9iaugvd" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjx30iwup0009vpd9v6rgbx4j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esxi/">esxi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
@@ -358,7 +348,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjx30fixs000hkfd9v8bhuehi" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjx30iwuv000gvpd9ew11r0l2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -409,7 +399,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjx30fixg0004kfd9bpx7c9b9" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjx30iwun0008vpd90ojhjx1u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -459,7 +449,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjx30fixw000mkfd977xybq7f" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjx30iwuy000lvpd9v7bvop1o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -504,7 +494,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjx30fixh0005kfd97lia0kuw" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjx30iwuh0002vpd9pqa9iicf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -550,7 +540,7 @@ File::Rename::rename(\@ARGV, $options);
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjx30fixm0009kfd9zllt2hfr" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjx30iwul0005vpd9q9jmbu36" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
