@@ -8,8 +8,27 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 07 Jun 2019 07:28:07 GMT</pubDate>
+    <pubDate>Wed, 19 Jun 2019 09:03:40 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Rename multiple files with a given pattern</title>
+      <link>http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/</link>
+      <guid>http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/</guid>
+      <pubDate>Wed, 19 Jun 2019 08:52:35 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>You may need to rename several files in a folder following a pattern.<br>Say you have </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">jmiguel@monk /tmp/a  $ touch file.1.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.2.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.3.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ ll</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x  2 jmiguel jmiguel 4096 jun 19 10:54 .</span><br><span class="line">drwxrwxrwt 28 root    root    4096 jun 19 10:54 ..</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.1.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.2.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.3.txt</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">And you want to get</span><br></pre></td></tr></table></figure><p>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.1.txt<br>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.2.txt<br>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.3.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">You can do a loop, string substitution... a mess. Or you can use the `rename` command in this way:</span><br><span class="line"></span><br><span class="line">`rename &apos;s/file/ppillo/g&apos; *`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Note than rename is a shell script made with perl, so maybe it&apos;s not available on your operating system (mint and ubuntu have it) but if you have perl you can just copy and paste de following code to create your own `rename` version.</span><br></pre></td></tr></table></figure></p><p>#</p><p>use strict;<br>use File::Rename ();<br>use Pod::Usage;</p><p>main() unless caller;</p><p>sub main {<br>    my $options = File::Rename::Options::GetOptions<br>        or pod2usage;</p><pre><code>mod_version() if $options-&gt;{show_version};pod2usage( -verbose =&gt; 2 ) if $options-&gt;{show_manual};pod2usage( -exitval =&gt; 1 ) if $options-&gt;{show_help};@ARGV = map {glob} @ARGV if $^O =~ m{Win}msx;File::Rename::rename(\@ARGV, $options);</code></pre><p>}</p><p>sub mod_version {<br>    print <strong>FILE</strong> .<br>  ‘ using File::Rename version ‘.<br>        $File::Rename::VERSION .”\n\n”;<br>    exit 0<br>}   </p><p>1;</p><p><code>`</code></p>]]></content:encoded>
+      
+      <comments>http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Copy thousand of files over ssh</title>

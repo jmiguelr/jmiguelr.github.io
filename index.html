@@ -69,6 +69,62 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Rename-multiple-files-with-a-given-pattern" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/" class="article-date">
+  <time datetime="2019-06-19T08:52:35.000Z" itemprop="datePublished">2019-06-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/">Rename multiple files with a given pattern</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>You may need to rename several files in a folder following a pattern.<br>Say you have </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">jmiguel@monk /tmp/a  $ touch file.1.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.2.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.3.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ ll</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x  2 jmiguel jmiguel 4096 jun 19 10:54 .</span><br><span class="line">drwxrwxrwt 28 root    root    4096 jun 19 10:54 ..</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.1.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.2.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.3.txt</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">And you want to get</span><br></pre></td></tr></table></figure>
+<p>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.1.txt<br>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.2.txt<br>-rw-r–r–  1 jmiguel jmiguel    0 jun 19 10:54 newname.3.txt<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">You can do a loop, string substitution... a mess. Or you can use the `rename` command in this way:</span><br><span class="line"></span><br><span class="line">`rename &apos;s/file/ppillo/g&apos; *`</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Note than rename is a shell script made with perl, so maybe it&apos;s not available on your operating system (mint and ubuntu have it) but if you have perl you can just copy and paste de following code to create your own `rename` version.</span><br></pre></td></tr></table></figure></p>
+<p>#</p>
+<p>use strict;<br>use File::Rename ();<br>use Pod::Usage;</p>
+<p>main() unless caller;</p>
+<p>sub main {<br>    my $options = File::Rename::Options::GetOptions<br>        or pod2usage;</p>
+<pre><code>mod_version() if $options-&gt;{show_version};
+pod2usage( -verbose =&gt; 2 ) if $options-&gt;{show_manual};
+pod2usage( -exitval =&gt; 1 ) if $options-&gt;{show_help};
+
+@ARGV = map {glob} @ARGV if $^O =~ m{Win}msx;
+
+File::Rename::rename(\@ARGV, $options);
+</code></pre><p>}</p>
+<p>sub mod_version {<br>    print <strong>FILE</strong> .<br>  ‘ using File::Rename version ‘.<br>        $File::Rename::VERSION .”\n\n”;<br>    exit 0<br>}   </p>
+<p>1;</p>
+<p><code>`</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="cjx30fixc0001kfd9khs85bqz" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Copy-thousand-of-files-over-ssh" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/07/Copy-thousand-of-files-over-ssh/" class="article-date">
@@ -108,7 +164,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="cjwlrr6xg0004mnd96mgnxqpd" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="cjx30fixk0008kfd9ppwmvnh5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -163,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="cjwlrr6xj0009mnd9we2x9f22" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="cjx30fixo000ckfd9iahkjh0x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -211,7 +267,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjwlrr6xc0001mnd9mak8cknp" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjx30fixe0002kfd93tspo8i2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -258,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjwlrr6xi0008mnd9ihkiwm7b" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjx30fixj0006kfd9d9iaugvd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esxi/">esxi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
@@ -302,7 +358,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjwlrr6xo000gmnd9k8bbx4ns" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjx30fixs000hkfd9v8bhuehi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -353,7 +409,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjwlrr6xh0006mnd9e3umusju" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjx30fixg0004kfd9bpx7c9b9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -403,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjwlrr6xq000imnd9ontwdbe0" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjx30fixw000mkfd977xybq7f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -448,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjwlrr6xe0002mnd9hit2149m" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjx30fixh0005kfd97lia0kuw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -494,52 +550,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjwlrr6xg0005mnd99c0j12sv" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjx30fixm0009kfd9zllt2hfr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Several-submit-actions-in-one-form" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/22/Several-submit-actions-in-one-form/" class="article-date">
-  <time datetime="2018-10-22T20:18:58.000Z" itemprop="datePublished">2018-10-22</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/22/Several-submit-actions-in-one-form/">Several submit actions in one form</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Sometimes you need to have several actions to be submitted on the same form. Usually you only have one button for this which points to the place you define on the <code>FORM ACTION</code> block.<br>So, how can you detect which button was clicked in plain HTML?</p>
-<p>You can use the <code>value</code> variable on button, this way:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;FORM METHOD=&quot;whatever&quot; ACTION=&quot;/your/endPoint/&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;accept&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Accept 1&lt;/button&gt;&quot;</span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;dontAccept&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Dont Accept&lt;/button&gt;&quot;</span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;maybe&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Maybe Accept&lt;/button&gt;&quot;</span><br></pre></td></tr></table></figure>
-<p>And in your code just check the <code>btnAction</code> parameter variable for <code>accept</code>, <code>dontAccept</code> or <code>maybe</code> values.  Easy!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjwlrr6xl000bmnd9oudh1d1d" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
 
     </footer>
   </div>
@@ -598,6 +612,10 @@
       <ul>
         
           <li>
+            <a href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/">Rename multiple files with a given pattern</a>
+          </li>
+        
+          <li>
             <a href="/2019/06/07/Copy-thousand-of-files-over-ssh/">Copy thousand of files over ssh</a>
           </li>
         
@@ -611,10 +629,6 @@
         
           <li>
             <a href="/2019/04/25/Setting-clock-on-ESXi-console/">Setting clock on ESXi console</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/">The fastest way to count columns in shell: AWK</a>
           </li>
         
       </ul>
