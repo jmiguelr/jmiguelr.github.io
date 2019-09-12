@@ -5,15 +5,20 @@
   
 
   
-  <title>Tag: esp | Tech Thoughts</title>
+  <title>Add a new ssh authorized key to a remote host... in one single line | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tech Thoughts">
-<meta property="og:url" content="http://jmiguelr.github.io/tags/esp/index.html">
+  <meta name="description" content="It’s a common task: “Please, add my public ssh key to that host”. And I usually get the key, copied it to buffer, ssh to the remote host, cd .ssh andfinally I do a cat - &amp;gt;&amp;gt; authorized_keys and p">
+<meta name="keywords" content="eng,linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Add a new ssh authorized key to a remote host... in one single line">
+<meta property="og:url" content="http://jmiguelr.github.io/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
+<meta property="og:description" content="It’s a common task: “Please, add my public ssh key to that host”. And I usually get the key, copied it to buffer, ssh to the remote host, cd .ssh andfinally I do a cat - &amp;gt;&amp;gt; authorized_keys and p">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-09-12T16:10:05.095Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tech Thoughts">
+<meta name="twitter:title" content="Add a new ssh authorized key to a remote host... in one single line">
+<meta name="twitter:description" content="It’s a common task: “Please, add my public ssh key to that host”. And I usually get the key, copied it to buffer, ssh to the remote host, cd .ssh andfinally I do a cat - &amp;gt;&amp;gt; authorized_keys and p">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -67,40 +72,58 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/12/Error-actualizando-docker-mint-18/" class="archive-article-date">
-  <time datetime="2018-11-12T14:58:40.000Z" itemprop="datePublished">Nov 12</time>
+        <section id="main"><article id="post-Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/" class="article-date">
+  <time datetime="2019-09-12T16:06:25.000Z" itemprop="datePublished">2019-09-12</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/12/Error-actualizando-docker-mint-18/">Error actualizando docker (mint 18)</a>
+    <h1 class="article-title" itemprop="name">
+      Add a new ssh authorized key to a remote host... in one single line
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>It’s a common task: “Please, add my public ssh key to that host”.</p>
+<p>And I usually get the key, copied it to buffer, ssh to the remote host, cd .ssh and<br>finally I do a <code>cat - &gt;&gt; authorized_keys</code> and paste the key.</p>
+<p>But you can do it in just one single line:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat new_key.pub | ssh myRemoteHost &quot;cat  &gt;&gt; ~/.ssh/authorized_keys&quot;</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
 
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/" data-id="ck0gw3z420001eld9bcaqvtw9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Rename multiple files with a given pattern</div>
+    </a>
+  
+</nav>
+
+  
+</article>
 
 </section>
         

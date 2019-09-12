@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
 
@@ -26,7 +26,7 @@
   
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 <body>
   <div id="container">
     <div id="wrap">
@@ -69,6 +69,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Error-actualizando-docker-mint-18" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/12/Error-actualizando-docker-mint-18/" class="article-date">
+  <time datetime="2018-11-12T14:58:40.000Z" itemprop="datePublished">2018-11-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/12/Error-actualizando-docker-mint-18/">Error actualizando docker (mint 18)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Hoy, actualizando el sistema desde el entorno gráfico, me ha salido un error de un paquete que no podía actualizar. El sistema me sugería que buscara cual era el paquete que daba problemas usando el filtro <em>rotos</em> .  Tras maldecirme por hacer estas cosas en el entorno gráfico en lugar de la consola, he ejecutado <code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code> desde la consola para ver que es lo que estaba pasando realmente.</p>
+<p>El resultado era:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Los siguientes paquetes tienen dependencias incumplidas:</span><br><span class="line"> docker-ce : Depende: containerd.io pero no está instalado</span><br><span class="line">E: Dependencias incumplidas. Pruebe de nuevo utilizando -f.</span><br><span class="line">jmiguel@mab ~  $ sudo apt-get -f install</span><br><span class="line">Leyendo lista de paquetes... Hecho</span><br><span class="line">Creando árbol de dependencias</span><br><span class="line">Leyendo la información de estado... Hecho</span><br><span class="line">Corrigiendo dependencias... Listo</span><br><span class="line">Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.</span><br><span class="line">  libjs-openlayers libwireshark8 libwiretap6 libwscodecs1 libwsutil7</span><br><span class="line">Utilice «sudo apt autoremove» para eliminarlos.</span><br><span class="line">Se instalarán los siguientes paquetes adicionales:</span><br><span class="line">  containerd.io</span><br><span class="line">Se instalarán los siguientes paquetes NUEVOS:</span><br><span class="line">  containerd.io</span><br><span class="line">0 actualizados, 1 nuevos se instalarán, 0 para eliminar y 0 no actualizados.</span><br><span class="line">1 no instalados del todo o eliminados.</span><br><span class="line">Se necesita descargar 0 B/19,9 MB de archivos.</span><br><span class="line">Se utilizarán 87,6 MB de espacio de disco adicional después de esta operación.</span><br><span class="line">¿Desea continuar? [S/n] S</span><br><span class="line">(Leyendo la base de datos ... 523472 ficheros o directorios instalados actualmente.)</span><br><span class="line">Preparando para desempaquetar .../containerd.io_1.2.0-1_amd64.deb ...</span><br><span class="line">Desempaquetando containerd.io (1.2.0-1) ...</span><br><span class="line">dpkg: error al procesar el archivo /var/cache/apt/archives/containerd.io_1.2.0-1_amd64.deb (--unpack):</span><br><span class="line"> intentando sobreescribir `/usr/sbin/runc&apos;, que está también en el paquete runc 1.0.0~rc2+docker1.13.1-0ubuntu1~16.04.1</span><br><span class="line">dpkg-deb: error: el subproceso copiado fue terminado por la señal (Broken pipe)</span><br><span class="line">Se encontraron errores al procesar:</span><br><span class="line"> /var/cache/apt/archives/containerd.io_1.2.0-1_amd64.deb</span><br></pre></td></tr></table></figure>
+<p>Parece que había algun problema con la actulizacion de docker. He probado a parar docker antes de actualizar pero el resultado era el mismo, asi que la solución ha sido desinstalar <code>docker-ce</code> y  <code>runc</code> , que parece ser antiguo y estar obsoleto.</p>
+<p>Asi que tras ejecutar:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker-ce</span><br><span class="line">sudo apt-get remove runc</span><br><span class="line">sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure>
+<p>Todo ha vuelto a la normalidad.</p>
+<p>Espero que a alguien le sirva :-)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ck0gw3z480006eld96n8ykplq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Several-submit-actions-in-one-form" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/10/22/Several-submit-actions-in-one-form/" class="article-date">
@@ -99,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="cjzsmh6l4000g6cd91zm57gx1" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ck0gw3z4i000held9w6rc0xf0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -140,7 +186,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="cjzsmh6l2000d6cd95r6ozku8" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ck0gw3z4j000jeld9tc9nutah" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -185,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="cjzsmh6l8000n6cd9tc79u957" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ck0gw3z4n000reld9mw24hgvr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
@@ -234,7 +280,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -245,6 +291,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/">Add a new ssh authorized key to a remote host... in one single line</a>
+          </li>
         
           <li>
             <a href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/">Rename multiple files with a given pattern</a>
@@ -260,10 +310,6 @@
         
           <li>
             <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/">Changing hostname on Ubuntu 18.04 Server</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/25/Setting-clock-on-ESXi-console/">Setting clock on ESXi console</a>
           </li>
         
       </ul>

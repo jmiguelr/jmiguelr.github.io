@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
+<head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
 
@@ -26,7 +26,7 @@
   
   <link rel="stylesheet" href="/css/style.css">
 </head>
-
+</html>
 <body>
   <div id="container">
     <div id="wrap">
@@ -69,6 +69,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/" class="article-date">
+  <time datetime="2019-09-12T16:06:25.000Z" itemprop="datePublished">2019-09-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/">Add a new ssh authorized key to a remote host... in one single line</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>It’s a common task: “Please, add my public ssh key to that host”.</p>
+<p>And I usually get the key, copied it to buffer, ssh to the remote host, cd .ssh and<br>finally I do a <code>cat - &gt;&gt; authorized_keys</code> and paste the key.</p>
+<p>But you can do it in just one single line:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat new_key.pub | ssh myRemoteHost &quot;cat  &gt;&gt; ~/.ssh/authorized_keys&quot;</span><br></pre></td></tr></table></figure>
+<p>That’s all!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/" data-id="ck0gw3z420001eld9bcaqvtw9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Rename-multiple-files-with-a-given-pattern" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/" class="article-date">
@@ -103,7 +146,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="cjzsmh6kw00066cd9z9tqmu82" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="ck0gw3z4a0008eld9nzeli19d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -154,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="cjzsmh6ku00046cd9h70mep7m" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="ck0gw3z460004eld98yybnasa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -209,7 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="cjzsmh6l0000b6cd9vfvxn8pg" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="ck0gw3z4f000eeld91o1jt53j" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -257,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="cjzsmh6kp00016cd9rck8ktyw" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="ck0gw3z430002eld9zod8cty7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -304,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="cjzsmh6ky00096cd9khul6evy" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="ck0gw3z4e000celd9ju75mhif" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esxi/">esxi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
@@ -348,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="cjzsmh6l6000i6cd9rnm6wyny" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="ck0gw3z4k000meld91ivbe1jx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -399,7 +442,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="cjzsmh6kx00086cd95dvxzfuw" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="ck0gw3z4b0009eld9xurs20b4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -449,7 +492,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="cjzsmh6l7000l6cd9f010p9c0" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ck0gw3z4l000oeld9nfwiwwsa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -494,56 +537,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="cjzsmh6kr00026cd90l4docoh" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ck0gw3z470005eld9f9t5mnky" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Error-actualizando-docker-mint-18" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/12/Error-actualizando-docker-mint-18/" class="article-date">
-  <time datetime="2018-11-12T14:58:40.000Z" itemprop="datePublished">2018-11-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/12/Error-actualizando-docker-mint-18/">Error actualizando docker (mint 18)</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Hoy, actualizando el sistema desde el entorno gráfico, me ha salido un error de un paquete que no podía actualizar. El sistema me sugería que buscara cual era el paquete que daba problemas usando el filtro <em>rotos</em> .  Tras maldecirme por hacer estas cosas en el entorno gráfico en lugar de la consola, he ejecutado <code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code> desde la consola para ver que es lo que estaba pasando realmente.</p>
-<p>El resultado era:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Los siguientes paquetes tienen dependencias incumplidas:</span><br><span class="line"> docker-ce : Depende: containerd.io pero no está instalado</span><br><span class="line">E: Dependencias incumplidas. Pruebe de nuevo utilizando -f.</span><br><span class="line">jmiguel@mab ~  $ sudo apt-get -f install</span><br><span class="line">Leyendo lista de paquetes... Hecho</span><br><span class="line">Creando árbol de dependencias</span><br><span class="line">Leyendo la información de estado... Hecho</span><br><span class="line">Corrigiendo dependencias... Listo</span><br><span class="line">Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.</span><br><span class="line">  libjs-openlayers libwireshark8 libwiretap6 libwscodecs1 libwsutil7</span><br><span class="line">Utilice «sudo apt autoremove» para eliminarlos.</span><br><span class="line">Se instalarán los siguientes paquetes adicionales:</span><br><span class="line">  containerd.io</span><br><span class="line">Se instalarán los siguientes paquetes NUEVOS:</span><br><span class="line">  containerd.io</span><br><span class="line">0 actualizados, 1 nuevos se instalarán, 0 para eliminar y 0 no actualizados.</span><br><span class="line">1 no instalados del todo o eliminados.</span><br><span class="line">Se necesita descargar 0 B/19,9 MB de archivos.</span><br><span class="line">Se utilizarán 87,6 MB de espacio de disco adicional después de esta operación.</span><br><span class="line">¿Desea continuar? [S/n] S</span><br><span class="line">(Leyendo la base de datos ... 523472 ficheros o directorios instalados actualmente.)</span><br><span class="line">Preparando para desempaquetar .../containerd.io_1.2.0-1_amd64.deb ...</span><br><span class="line">Desempaquetando containerd.io (1.2.0-1) ...</span><br><span class="line">dpkg: error al procesar el archivo /var/cache/apt/archives/containerd.io_1.2.0-1_amd64.deb (--unpack):</span><br><span class="line"> intentando sobreescribir `/usr/sbin/runc&apos;, que está también en el paquete runc 1.0.0~rc2+docker1.13.1-0ubuntu1~16.04.1</span><br><span class="line">dpkg-deb: error: el subproceso copiado fue terminado por la señal (Broken pipe)</span><br><span class="line">Se encontraron errores al procesar:</span><br><span class="line"> /var/cache/apt/archives/containerd.io_1.2.0-1_amd64.deb</span><br></pre></td></tr></table></figure>
-<p>Parece que había algun problema con la actulizacion de docker. He probado a parar docker antes de actualizar pero el resultado era el mismo, asi que la solución ha sido desinstalar <code>docker-ce</code> y  <code>runc</code> , que parece ser antiguo y estar obsoleto.</p>
-<p>Asi que tras ejecutar:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker-ce</span><br><span class="line">sudo apt-get remove runc</span><br><span class="line">sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure>
-<p>Todo ha vuelto a la normalidad.</p>
-<p>Espero que a alguien le sirva :-)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="cjzsmh6kv00056cd9ya3eutz1" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
 
     </footer>
   </div>
@@ -589,7 +586,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -600,6 +597,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/">Add a new ssh authorized key to a remote host... in one single line</a>
+          </li>
         
           <li>
             <a href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/">Rename multiple files with a given pattern</a>
@@ -615,10 +616,6 @@
         
           <li>
             <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/">Changing hostname on Ubuntu 18.04 Server</a>
-          </li>
-        
-          <li>
-            <a href="/2019/04/25/Setting-clock-on-ESXi-console/">Setting clock on ESXi console</a>
           </li>
         
       </ul>
