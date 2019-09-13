@@ -8,8 +8,27 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Thu, 12 Sep 2019 16:10:05 GMT</pubDate>
+    <pubDate>Fri, 13 Sep 2019 09:25:41 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Show slow queries on postgresql</title>
+      <link>http://jmiguelr.github.io/2019/09/13/Show-slow-queries-on-postgresql/</link>
+      <guid>http://jmiguelr.github.io/2019/09/13/Show-slow-queries-on-postgresql/</guid>
+      <pubDate>Fri, 13 Sep 2019 09:17:25 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>In postgresql it’s pretty easy to show which queries can be optimized on<br>your application. Or, at least, which queries are more time consuming. </p><p>Just execute the following statement on your database</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE myDatabase SET log_min_duration_statement = 5000;</span><br></pre></td></tr></table></figure><p>to show which queres takes more than 5 seconds. </p><p>Output will go to your postgresql system log. </p>]]></content:encoded>
+      
+      <comments>http://jmiguelr.github.io/2019/09/13/Show-slow-queries-on-postgresql/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Add a new ssh authorized key to a remote host... in one single line</title>

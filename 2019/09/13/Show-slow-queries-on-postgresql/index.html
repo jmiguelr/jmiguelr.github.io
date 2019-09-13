@@ -5,20 +5,20 @@
   
 
   
-  <title>Setting default Linux kernel | Tech Thoughts</title>
+  <title>Show slow queries on postgresql | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Sometimes we want to boot Linux with a older kernel than default. If it’s just one time, it’s a piece of cake to select it on the boot menu. Things starts to get a bit worse if you need to boot everyt">
+  <meta name="description" content="In postgresql it’s pretty easy to show which queries can be optimized onyour application. Or, at least, which queries are more time consuming.  Just execute the following statement on your database 1A">
 <meta name="keywords" content="eng,linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Setting default Linux kernel">
-<meta property="og:url" content="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/index.html">
+<meta property="og:title" content="Show slow queries on postgresql">
+<meta property="og:url" content="http://jmiguelr.github.io/2019/09/13/Show-slow-queries-on-postgresql/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
-<meta property="og:description" content="Sometimes we want to boot Linux with a older kernel than default. If it’s just one time, it’s a piece of cake to select it on the boot menu. Things starts to get a bit worse if you need to boot everyt">
+<meta property="og:description" content="In postgresql it’s pretty easy to show which queries can be optimized onyour application. Or, at least, which queries are more time consuming.  Just execute the following statement on your database 1A">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-05-20T14:45:28.988Z">
+<meta property="og:updated_time" content="2019-09-13T09:25:41.961Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Setting default Linux kernel">
-<meta name="twitter:description" content="Sometimes we want to boot Linux with a older kernel than default. If it’s just one time, it’s a piece of cake to select it on the boot menu. Things starts to get a bit worse if you need to boot everyt">
+<meta name="twitter:title" content="Show slow queries on postgresql">
+<meta name="twitter:description" content="In postgresql it’s pretty easy to show which queries can be optimized onyour application. Or, at least, which queries are more time consuming.  Just execute the following statement on your database 1A">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -72,10 +72,10 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main"><article id="post-Setting-default-Linux-kernel" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-Show-slow-queries-on-postgresql" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/05/20/Setting-default-Linux-kernel/" class="article-date">
-  <time datetime="2019-05-20T14:34:12.000Z" itemprop="datePublished">2019-05-20</time>
+    <a href="/2019/09/13/Show-slow-queries-on-postgresql/" class="article-date">
+  <time datetime="2019-09-13T09:17:25.000Z" itemprop="datePublished">2019-09-13</time>
 </a>
     
   </div>
@@ -86,7 +86,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Setting default Linux kernel
+      Show slow queries on postgresql
     </h1>
   
 
@@ -94,28 +94,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Sometimes we want to boot Linux with a older kernel than default. If it’s just one time, it’s a piece of cake to select it on the boot menu.</p>
-<p>Things starts to get a bit worse if you need to boot everytime with a previous version because (as it’s my case right now) you suspect there’s something that could affect performance or stability but you’re not sure.</p>
-<p>The best suited for my needs it’s telling <code>grub2</code> to remember the last kernel used. To do this you have to follow this steps:</p>
-<ul>
-<li>Keep a copy of <code>grub</code> file.  Just in case…</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /etc/default/grub /etc/default/grub.bak</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Edit it with your favourite editor: vi, emacs, nano, joe …</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo joe /etc/default/grub</span><br></pre></td></tr></table></figure>
-<p>and change the default behaviour <code>GRUB_DEFAULT=0</code> which cause grub to choose the latest kernel with:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRUB_DEFAULT=saved</span><br><span class="line">GRUB_SAVEDEFAULT=true</span><br></pre></td></tr></table></figure>
-<ul>
-<li>Update grub with <code>sudo update-grub</code></li>
-</ul>
-<p>Done!</p>
+        <p>In postgresql it’s pretty easy to show which queries can be optimized on<br>your application. Or, at least, which queries are more time consuming. </p>
+<p>Just execute the following statement on your database</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER DATABASE myDatabase SET log_min_duration_statement = 5000;</span><br></pre></td></tr></table></figure>
+<p>to show which queres takes more than 5 seconds. </p>
+<p>Output will go to your postgresql system log. </p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="ck0hx3gao0008ecd9jo1xxbpq" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/09/13/Show-slow-queries-on-postgresql/" data-id="ck0hx3gav000iecd9hvv4l5rz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -126,19 +114,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/06/07/Copy-thousand-of-files-over-ssh/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Copy thousand of files over ssh
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Changing hostname on Ubuntu 18.04 Server</div>
+      <div class="article-nav-title">Add a new ssh authorized key to a remote host... in one single line</div>
     </a>
   
 </nav>
