@@ -8,8 +8,27 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Fri, 13 Sep 2019 09:31:16 GMT</pubDate>
+    <pubDate>Sun, 19 Jan 2020 15:53:34 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Getting Hyperfido U2F keys working on Linux (Ubuntu or Mint)</title>
+      <link>http://jmiguelr.github.io/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/</link>
+      <guid>http://jmiguelr.github.io/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/</guid>
+      <pubDate>Sun, 19 Jan 2020 15:29:55 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>I recently got a pair of cheap HyperFido keys. Some of them are <a href="https://www.amazon.es/HYPERSECU-HyperFIDO-Mini-U2F-Security/dp/B01LZO0WE9/ref=pd_sbs_107_t_0/262-8811488-2901814" target="_blank" rel="noopener">as cheap as 5,5€ on Amazon</a> but you can get others which maybe have better quality. Also, there are another keys which have support for bluethooh, NFC, and other features that can be very useful. </p><p>Anyway. That keys don’t work out of the box in Linux as they are not recognized as the proper hardware type by linux kernel, but the solution is very easy to implement.<br>I’m running right now 3 linux boxes with Linux Mint 18 and 19. </p><p>The solution, as I wrote, it’s really simple.  Just go to <code>/etc/udev/rules.d</code> (of course, as root) and create a file named <code>70-u2f.rules</code>. </p><p>Fill it with the following data:;</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># this udev file should be used with udev 188 and newer</span><br><span class="line">ACTION!=&quot;add|change&quot;, GOTO=&quot;u2f_end&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># HyperSecu HyperFIDO</span><br><span class="line">KERNEL==&quot;hidraw*&quot;, SUBSYSTEM==&quot;hidraw&quot;, ATTRS&#123;idVendor&#125;==&quot;096e|2ccf&quot;, ATTRS&#123;idProduct&#125;==&quot;0880&quot;, TAG+=&quot;uaccess&quot;</span><br><span class="line"></span><br><span class="line">LABEL=&quot;u2f_end&quot;</span><br></pre></td></tr></table></figure><p>Some places write that only the 096e idVendor it’s needed. In my case the id is 2ccf (you can check it with <code>lsusb</code> command)</p><p>After creating the file, you can either reboot your computer or just execute <code>sudo udevadm control --reload-rules</code> </p><p>Some references:</p><p><a href="https://gist.github.com/quantenschaum/1426c93fe10fb8e5ed040100d6adfc7b" target="_blank" rel="noopener">https://gist.github.com/quantenschaum/1426c93fe10fb8e5ed040100d6adfc7b</a><br><a href="https://github.com/Yubico/libu2f-host/blob/master/70-u2f.rules" target="_blank" rel="noopener">https://github.com/Yubico/libu2f-host/blob/master/70-u2f.rules</a></p>]]></content:encoded>
+      
+      <comments>http://jmiguelr.github.io/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>Show slow queries on postgresql</title>

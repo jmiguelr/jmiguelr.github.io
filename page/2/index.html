@@ -69,6 +69,56 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Undo-a-pushed-commit-on-git" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" class="article-date">
+  <time datetime="2018-11-28T10:08:49.000Z" itemprop="datePublished">2018-11-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/11/28/Undo-a-pushed-commit-on-git/">Undo a pushed commit on git</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>We all know it. Shit happens.</p>
+<p>Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what was going wrong but the reality was that something was broken so I decided to go back in time.</p>
+<p>The commits (2 commits) was already pushed to our bitbucket and tried several approaches. I created a detached branch, modify and commit. No success. Then I tried some of features IntelliJ gaves me, but I could find a good one.</p>
+<p>So finally I found (<a href="https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener">stackoverflow at rescue</a>) this solution which help <strong>in my case</strong>.  Be careful: my problem may be different than yours and so the solution. Even more, the solution I used it’s not the choosen as the best on previous link.</p>
+<p>I had the following git history</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">commit 2071cf3cb8</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:16:48 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 5ff2c4a3a1</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:11:06 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 3a37cbc8e7</span><br><span class="line">Author: yyyyy</span><br><span class="line">Date:   Wed Nov 28 09:58:33 2018 +0100</span><br></pre></td></tr></table></figure>
+<p>The two top commits was mine, and was wrong. I wanted to go back to 3a37cbc8e7 so I use the following sequence:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Resets index to former commit; replace &apos;3a37cbc8e7&apos; with your commit code</span><br><span class="line">git reset 3a37cbc8e7</span><br><span class="line"></span><br><span class="line"># Moves pointer back to previous HEAD</span><br><span class="line">git reset --soft HEAD@&#123;1&#125;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;Revert commit to the past&quot;</span><br><span class="line"></span><br><span class="line"># Updates working copy to reflect the new commit</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+<p>Here is the point where you’re back to the commit you wanted to be. Check it. If you’re satisfied, just push it.</p>
+<p>And additional benefit with this approach is that you don’t loose your history: there will be ever a culprit (myself, in this case) written on the chain.</p>
+<p>Hope this helps.</p>
+<p>(*) PS: Of course, the blame on SonarLint it’s just a joke. The fault was mine :-)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ck5l7bfm7000tc9d9iya8cibu" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Convert-file-encoding-bulk-way" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/20/Convert-file-encoding-bulk-way/" class="article-date">
@@ -102,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ck0hxa5hn0002mtd9rg0w6iv9" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ck5l7bflg0004c9d9jzc61yki" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -148,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ck0hxa5hv0005mtd9y3meioa7" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ck5l7bfli0005c9d95pbfp4bm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -190,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ck0hxa5i3000cmtd97ncg8nb7" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ck5l7bflt000ec9d9l6abnwsc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
@@ -231,7 +281,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ck0hxa5il000tmtd9240jyly5" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ck5l7bflz000mc9d9fi21odx4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -276,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ck0hxa5ij000rmtd9f8paz8sz" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ck5l7bfm9000wc9d9scgmbgy8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
@@ -325,7 +375,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -336,6 +386,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/">Getting Hyperfido U2F keys working on Linux (Ubuntu or Mint)</a>
+          </li>
         
           <li>
             <a href="/2019/09/13/Show-slow-queries-on-postgresql/">Show slow queries on postgresql</a>
@@ -353,10 +407,6 @@
             <a href="/2019/06/07/Copy-thousand-of-files-over-ssh/">Copy thousand of files over ssh</a>
           </li>
         
-          <li>
-            <a href="/2019/05/20/Setting-default-Linux-kernel/">Setting default Linux kernel</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -369,7 +419,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 jmiguel rodriguez<br>
+      &copy; 2020 jmiguel rodriguez<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>

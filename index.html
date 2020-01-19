@@ -69,6 +69,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/" class="article-date">
+  <time datetime="2020-01-19T15:29:55.000Z" itemprop="datePublished">2020-01-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/">Getting Hyperfido U2F keys working on Linux (Ubuntu or Mint)</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>I recently got a pair of cheap HyperFido keys. Some of them are <a href="https://www.amazon.es/HYPERSECU-HyperFIDO-Mini-U2F-Security/dp/B01LZO0WE9/ref=pd_sbs_107_t_0/262-8811488-2901814" target="_blank" rel="noopener">as cheap as 5,5€ on Amazon</a> but you can get others which maybe have better quality. Also, there are another keys which have support for bluethooh, NFC, and other features that can be very useful. </p>
+<p>Anyway. That keys don’t work out of the box in Linux as they are not recognized as the proper hardware type by linux kernel, but the solution is very easy to implement.<br>I’m running right now 3 linux boxes with Linux Mint 18 and 19. </p>
+<p>The solution, as I wrote, it’s really simple.  Just go to <code>/etc/udev/rules.d</code> (of course, as root) and create a file named <code>70-u2f.rules</code>. </p>
+<p>Fill it with the following data:;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># this udev file should be used with udev 188 and newer</span><br><span class="line">ACTION!=&quot;add|change&quot;, GOTO=&quot;u2f_end&quot;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"># HyperSecu HyperFIDO</span><br><span class="line">KERNEL==&quot;hidraw*&quot;, SUBSYSTEM==&quot;hidraw&quot;, ATTRS&#123;idVendor&#125;==&quot;096e|2ccf&quot;, ATTRS&#123;idProduct&#125;==&quot;0880&quot;, TAG+=&quot;uaccess&quot;</span><br><span class="line"></span><br><span class="line">LABEL=&quot;u2f_end&quot;</span><br></pre></td></tr></table></figure>
+<p>Some places write that only the 096e idVendor it’s needed. In my case the id is 2ccf (you can check it with <code>lsusb</code> command)</p>
+<p>After creating the file, you can either reboot your computer or just execute <code>sudo udevadm control --reload-rules</code> </p>
+<p>Some references:</p>
+<p><a href="https://gist.github.com/quantenschaum/1426c93fe10fb8e5ed040100d6adfc7b" target="_blank" rel="noopener">https://gist.github.com/quantenschaum/1426c93fe10fb8e5ed040100d6adfc7b</a><br><a href="https://github.com/Yubico/libu2f-host/blob/master/70-u2f.rules" target="_blank" rel="noopener">https://github.com/Yubico/libu2f-host/blob/master/70-u2f.rules</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/" data-id="ck5l7bflo0008c9d9bepoxk5f" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Show-slow-queries-on-postgresql" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/09/13/Show-slow-queries-on-postgresql/" class="article-date">
@@ -101,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/09/13/Show-slow-queries-on-postgresql/" data-id="ck0hxa5i9000hmtd9gsuypdk4" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/09/13/Show-slow-queries-on-postgresql/" data-id="ck5l7bfm5000oc9d9ec24ah4r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -144,7 +191,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/" data-id="ck0hxa5hl0001mtd94x1nrxgb" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/" data-id="ck5l7bfl70001c9d9r1hfugxp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -190,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="ck0hxa5hz0008mtd9mtakywji" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="ck5l7bflp0009c9d9jsp73wzq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -241,7 +288,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="ck0hxa5hr0004mtd9e66ej95p" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="ck5l7bfll0006c9d9vkn2qikh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -296,7 +343,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="ck0hxa5ic000jmtd9kencxhx6" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/05/20/Setting-default-Linux-kernel/" data-id="ck5l7bflx000jc9d9n5qn41gw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -344,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="ck0hxa5hx0006mtd92e61de1k" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Changing-hostname-on-Ubuntu-18-04-Server/" data-id="ck5l7bfld0002c9d99tmp24oh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
@@ -391,7 +438,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="ck0hxa5i10009mtd9un2r64wg" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/04/25/Setting-clock-on-ESXi-console/" data-id="ck5l7bflw000hc9d9p92jfjqr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esxi/">esxi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
@@ -435,7 +482,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="ck0hxa5if000mmtd9okice8df" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="ck5l7bfm6000rc9d9pnqad81g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
@@ -486,60 +533,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="ck0hxa5i5000emtd9tavcyqbl" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="ck5l7bfls000cc9d9hewbeh2a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-Undo-a-pushed-commit-on-git" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" class="article-date">
-  <time datetime="2018-11-28T10:08:49.000Z" itemprop="datePublished">2018-11-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/11/28/Undo-a-pushed-commit-on-git/">Undo a pushed commit on git</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>We all know it. Shit happens.</p>
-<p>Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what was going wrong but the reality was that something was broken so I decided to go back in time.</p>
-<p>The commits (2 commits) was already pushed to our bitbucket and tried several approaches. I created a detached branch, modify and commit. No success. Then I tried some of features IntelliJ gaves me, but I could find a good one.</p>
-<p>So finally I found (<a href="https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener">stackoverflow at rescue</a>) this solution which help <strong>in my case</strong>.  Be careful: my problem may be different than yours and so the solution. Even more, the solution I used it’s not the choosen as the best on previous link.</p>
-<p>I had the following git history</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">commit 2071cf3cb8</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:16:48 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 5ff2c4a3a1</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:11:06 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 3a37cbc8e7</span><br><span class="line">Author: yyyyy</span><br><span class="line">Date:   Wed Nov 28 09:58:33 2018 +0100</span><br></pre></td></tr></table></figure>
-<p>The two top commits was mine, and was wrong. I wanted to go back to 3a37cbc8e7 so I use the following sequence:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Resets index to former commit; replace &apos;3a37cbc8e7&apos; with your commit code</span><br><span class="line">git reset 3a37cbc8e7</span><br><span class="line"></span><br><span class="line"># Moves pointer back to previous HEAD</span><br><span class="line">git reset --soft HEAD@&#123;1&#125;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;Revert commit to the past&quot;</span><br><span class="line"></span><br><span class="line"># Updates working copy to reflect the new commit</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
-<p>Here is the point where you’re back to the commit you wanted to be. Check it. If you’re satisfied, just push it.</p>
-<p>And additional benefit with this approach is that you don’t loose your history: there will be ever a culprit (myself, in this case) written on the chain.</p>
-<p>Hope this helps.</p>
-<p>(*) PS: Of course, the blame on SonarLint it’s just a joke. The fault was mine :-)</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ck0hxa5ih000omtd9g1bwol74" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
 
     </footer>
   </div>
@@ -585,7 +582,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -596,6 +593,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/">Getting Hyperfido U2F keys working on Linux (Ubuntu or Mint)</a>
+          </li>
         
           <li>
             <a href="/2019/09/13/Show-slow-queries-on-postgresql/">Show slow queries on postgresql</a>
@@ -613,10 +614,6 @@
             <a href="/2019/06/07/Copy-thousand-of-files-over-ssh/">Copy thousand of files over ssh</a>
           </li>
         
-          <li>
-            <a href="/2019/05/20/Setting-default-Linux-kernel/">Setting default Linux kernel</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -629,7 +626,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 jmiguel rodriguez<br>
+      &copy; 2020 jmiguel rodriguez<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
