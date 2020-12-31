@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
 
@@ -11,9 +11,9 @@
 <meta property="og:title" content="Tech Thoughts">
 <meta property="og:url" content="http://jmiguelr.github.io/page/2/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="jmiguel rodriguez">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tech Thoughts">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -24,9 +24,11 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
 <body>
   <div id="container">
     <div id="wrap">
@@ -51,7 +53,7 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="https://jmiguel.eu">jmiguel.eu</a>
+          <a class="main-nav-link" href="https://jmiguel.eu" target="_blank" rel="noopener">jmiguel.eu</a>
         
       </nav>
       <nav id="sub-nav">
@@ -97,8 +99,10 @@
 <p>So finally I found (<a href="https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener">stackoverflow at rescue</a>) this solution which help <strong>in my case</strong>.  Be careful: my problem may be different than yours and so the solution. Even more, the solution I used it’s not the choosen as the best on previous link.</p>
 <p>I had the following git history</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">commit 2071cf3cb8</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:16:48 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 5ff2c4a3a1</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:11:06 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 3a37cbc8e7</span><br><span class="line">Author: yyyyy</span><br><span class="line">Date:   Wed Nov 28 09:58:33 2018 +0100</span><br></pre></td></tr></table></figure>
+
 <p>The two top commits was mine, and was wrong. I wanted to go back to 3a37cbc8e7 so I use the following sequence:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Resets index to former commit; replace &apos;3a37cbc8e7&apos; with your commit code</span><br><span class="line">git reset 3a37cbc8e7</span><br><span class="line"></span><br><span class="line"># Moves pointer back to previous HEAD</span><br><span class="line">git reset --soft HEAD@&#123;1&#125;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;Revert commit to the past&quot;</span><br><span class="line"></span><br><span class="line"># Updates working copy to reflect the new commit</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Resets index to former commit; replace &#39;3a37cbc8e7&#39; with your commit code</span><br><span class="line">git reset 3a37cbc8e7</span><br><span class="line"></span><br><span class="line"># Moves pointer back to previous HEAD</span><br><span class="line">git reset --soft HEAD@&#123;1&#125;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;Revert commit to the past&quot;</span><br><span class="line"></span><br><span class="line"># Updates working copy to reflect the new commit</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+
 <p>Here is the point where you’re back to the commit you wanted to be. Check it. If you’re satisfied, just push it.</p>
 <p>And additional benefit with this approach is that you don’t loose your history: there will be ever a culprit (myself, in this case) written on the chain.</p>
 <p>Hope this helps.</p>
@@ -107,10 +111,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ck5l7bfm7000tc9d9iya8cibu" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ckjd2nq2t000w7pd9egprdnsc" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
 
     </footer>
   </div>
@@ -143,19 +147,20 @@
       
         <p>I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almost 10 years later -yep that is a really <strong>legacy</strong> project-) we’re updating it, mostly in the frontend user interface.</p>
 <p>So, when we started working with it we had a mix of old ISO-8859-1 files and new UTF-8. At some point we decided to change all files encoding to UTF-8. We made some changes using the IntelliJ features for this purpose but it was clear we needed some automatized way to do it, and this is the one-liner way we used:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -name &quot;*.java&quot; -exec file &#123;&#125; \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; do iconv -f ISO-8859-1 -t UTF-8 &lt; $a &gt; /tmp/tmp ; &quot;mv&quot; /tmp/tmp $a ; done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -name &quot;*.java&quot; -exec file &#123;&#125; \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; do iconv -f ISO-8859-1 -t UTF-8 &lt; $a &gt; &#x2F;tmp&#x2F;tmp ; &quot;mv&quot; &#x2F;tmp&#x2F;tmp $a ; done</span><br></pre></td></tr></table></figure>
+
 <p>So read it as follows:</p>
 <p>“Find all java files, check which of them are encoded as <em>ISO-whatever</em> and for all of them use the <code>iconv</code> command to create a new correctly encoded file as <code>/tmp/tmp</code> and then move it to the original location”</p>
-<p>Of course: change the <em>“.java”</em> for whatever you need, and maybe it’s a good idea to run it in several steps to see what’s happening.</p>
+<p>Of course: change the *”.java”* for whatever you need, and maybe it’s a good idea to run it in several steps to see what’s happening.</p>
 <p>Run first just the <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO</code> , then something like <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; echo &quot;gonna work with $a&quot; ; done</code> so you can be sure you don’t break anything (make a backup first!)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ck5l7bflg0004c9d9jzc61yki" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ckjd2nq2600057pd9axh51cuo" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -188,20 +193,22 @@
       
         <p>Hoy, actualizando el sistema desde el entorno gráfico, me ha salido un error de un paquete que no podía actualizar. El sistema me sugería que buscara cual era el paquete que daba problemas usando el filtro <em>rotos</em> .  Tras maldecirme por hacer estas cosas en el entorno gráfico en lugar de la consola, he ejecutado <code>sudo apt-get update &amp;&amp; sudo apt-get upgrade</code> desde la consola para ver que es lo que estaba pasando realmente.</p>
 <p>El resultado era:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Los siguientes paquetes tienen dependencias incumplidas:</span><br><span class="line"> docker-ce : Depende: containerd.io pero no está instalado</span><br><span class="line">E: Dependencias incumplidas. Pruebe de nuevo utilizando -f.</span><br><span class="line">jmiguel@mab ~  $ sudo apt-get -f install</span><br><span class="line">Leyendo lista de paquetes... Hecho</span><br><span class="line">Creando árbol de dependencias</span><br><span class="line">Leyendo la información de estado... Hecho</span><br><span class="line">Corrigiendo dependencias... Listo</span><br><span class="line">Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.</span><br><span class="line">  libjs-openlayers libwireshark8 libwiretap6 libwscodecs1 libwsutil7</span><br><span class="line">Utilice «sudo apt autoremove» para eliminarlos.</span><br><span class="line">Se instalarán los siguientes paquetes adicionales:</span><br><span class="line">  containerd.io</span><br><span class="line">Se instalarán los siguientes paquetes NUEVOS:</span><br><span class="line">  containerd.io</span><br><span class="line">0 actualizados, 1 nuevos se instalarán, 0 para eliminar y 0 no actualizados.</span><br><span class="line">1 no instalados del todo o eliminados.</span><br><span class="line">Se necesita descargar 0 B/19,9 MB de archivos.</span><br><span class="line">Se utilizarán 87,6 MB de espacio de disco adicional después de esta operación.</span><br><span class="line">¿Desea continuar? [S/n] S</span><br><span class="line">(Leyendo la base de datos ... 523472 ficheros o directorios instalados actualmente.)</span><br><span class="line">Preparando para desempaquetar .../containerd.io_1.2.0-1_amd64.deb ...</span><br><span class="line">Desempaquetando containerd.io (1.2.0-1) ...</span><br><span class="line">dpkg: error al procesar el archivo /var/cache/apt/archives/containerd.io_1.2.0-1_amd64.deb (--unpack):</span><br><span class="line"> intentando sobreescribir `/usr/sbin/runc&apos;, que está también en el paquete runc 1.0.0~rc2+docker1.13.1-0ubuntu1~16.04.1</span><br><span class="line">dpkg-deb: error: el subproceso copiado fue terminado por la señal (Broken pipe)</span><br><span class="line">Se encontraron errores al procesar:</span><br><span class="line"> /var/cache/apt/archives/containerd.io_1.2.0-1_amd64.deb</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">Los siguientes paquetes tienen dependencias incumplidas:</span><br><span class="line"> docker-ce : Depende: containerd.io pero no está instalado</span><br><span class="line">E: Dependencias incumplidas. Pruebe de nuevo utilizando -f.</span><br><span class="line">jmiguel@mab ~  $ sudo apt-get -f install</span><br><span class="line">Leyendo lista de paquetes... Hecho</span><br><span class="line">Creando árbol de dependencias</span><br><span class="line">Leyendo la información de estado... Hecho</span><br><span class="line">Corrigiendo dependencias... Listo</span><br><span class="line">Los paquetes indicados a continuación se instalaron de forma automática y ya no son necesarios.</span><br><span class="line">  libjs-openlayers libwireshark8 libwiretap6 libwscodecs1 libwsutil7</span><br><span class="line">Utilice «sudo apt autoremove» para eliminarlos.</span><br><span class="line">Se instalarán los siguientes paquetes adicionales:</span><br><span class="line">  containerd.io</span><br><span class="line">Se instalarán los siguientes paquetes NUEVOS:</span><br><span class="line">  containerd.io</span><br><span class="line">0 actualizados, 1 nuevos se instalarán, 0 para eliminar y 0 no actualizados.</span><br><span class="line">1 no instalados del todo o eliminados.</span><br><span class="line">Se necesita descargar 0 B&#x2F;19,9 MB de archivos.</span><br><span class="line">Se utilizarán 87,6 MB de espacio de disco adicional después de esta operación.</span><br><span class="line">¿Desea continuar? [S&#x2F;n] S</span><br><span class="line">(Leyendo la base de datos ... 523472 ficheros o directorios instalados actualmente.)</span><br><span class="line">Preparando para desempaquetar ...&#x2F;containerd.io_1.2.0-1_amd64.deb ...</span><br><span class="line">Desempaquetando containerd.io (1.2.0-1) ...</span><br><span class="line">dpkg: error al procesar el archivo &#x2F;var&#x2F;cache&#x2F;apt&#x2F;archives&#x2F;containerd.io_1.2.0-1_amd64.deb (--unpack):</span><br><span class="line"> intentando sobreescribir &#96;&#x2F;usr&#x2F;sbin&#x2F;runc&#39;, que está también en el paquete runc 1.0.0~rc2+docker1.13.1-0ubuntu1~16.04.1</span><br><span class="line">dpkg-deb: error: el subproceso copiado fue terminado por la señal (Broken pipe)</span><br><span class="line">Se encontraron errores al procesar:</span><br><span class="line"> &#x2F;var&#x2F;cache&#x2F;apt&#x2F;archives&#x2F;containerd.io_1.2.0-1_amd64.deb</span><br></pre></td></tr></table></figure>
+
 <p>Parece que había algun problema con la actulizacion de docker. He probado a parar docker antes de actualizar pero el resultado era el mismo, asi que la solución ha sido desinstalar <code>docker-ce</code> y  <code>runc</code> , que parece ser antiguo y estar obsoleto.</p>
 <p>Asi que tras ejecutar:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get remove docker-ce</span><br><span class="line">sudo apt-get remove runc</span><br><span class="line">sudo apt-get install docker-ce</span><br></pre></td></tr></table></figure>
+
 <p>Todo ha vuelto a la normalidad.</p>
 <p>Espero que a alguien le sirva :-)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ck5l7bfli0005c9d95pbfp4bm" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ckjd2nq2900077pd9bbk618w6" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -234,16 +241,17 @@
       
         <p>Sometimes you need to have several actions to be submitted on the same form. Usually you only have one button for this which points to the place you define on the <code>FORM ACTION</code> block.<br>So, how can you detect which button was clicked in plain HTML?</p>
 <p>You can use the <code>value</code> variable on button, this way:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;FORM METHOD=&quot;whatever&quot; ACTION=&quot;/your/endPoint/&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;accept&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Accept 1&lt;/button&gt;&quot;</span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;dontAccept&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Dont Accept&lt;/button&gt;&quot;</span><br><span class="line">&lt;button name=&quot;btnaction&quot; value=&quot;maybe&quot; class=&quot;...&quot; type=&quot;submit&quot;&gt;Maybe Accept&lt;/button&gt;&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;FORM METHOD&#x3D;&quot;whatever&quot; ACTION&#x3D;&quot;&#x2F;your&#x2F;endPoint&#x2F;&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;button name&#x3D;&quot;btnaction&quot; value&#x3D;&quot;accept&quot; class&#x3D;&quot;...&quot; type&#x3D;&quot;submit&quot;&gt;Accept 1&lt;&#x2F;button&gt;&quot;</span><br><span class="line">&lt;button name&#x3D;&quot;btnaction&quot; value&#x3D;&quot;dontAccept&quot; class&#x3D;&quot;...&quot; type&#x3D;&quot;submit&quot;&gt;Dont Accept&lt;&#x2F;button&gt;&quot;</span><br><span class="line">&lt;button name&#x3D;&quot;btnaction&quot; value&#x3D;&quot;maybe&quot; class&#x3D;&quot;...&quot; type&#x3D;&quot;submit&quot;&gt;Maybe Accept&lt;&#x2F;button&gt;&quot;</span><br></pre></td></tr></table></figure>
+
 <p>And in your code just check the <code>btnAction</code> parameter variable for <code>accept</code>, <code>dontAccept</code> or <code>maybe</code> values.  Easy!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ck5l7bflt000ec9d9l6abnwsc" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ckjd2nq2k000k7pd9gnmdbysa" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/" rel="tag">html</a></li></ul>
 
     </footer>
   </div>
@@ -276,15 +284,17 @@
       
         <p>This is the kind of things I have to seach everytime I need to install a new drive on a computer. As this is the kind of things I don’t do everyday, I forget it. </p>
 <p>So… How list the devices IDs on a Linux system?. Just like this:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@caronte:~# blkid</span><br><span class="line">/dev/sda1: UUID=&quot;d5a0a58e-13bc-46bb-b106-de5219dd7259&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;92e8992d-01&quot;</span><br><span class="line">/dev/sda2: UUID=&quot;14fa763f-0861-41c3-ba52-ce25e94e009a&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;92e8992d-02&quot;</span><br><span class="line">/dev/sdb1: UUID=&quot;5bd7c629-74af-4714-b3f6-34bab7a988b0&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;dd4daff0-c29a-4489-ab93-06e3929e2cad&quot;</span><br><span class="line">/dev/sdc1: UUID=&quot;42123f82-e997-46b6-9dc7-d1d7f521379f&quot; TYPE=&quot;ext4&quot; PARTUUID=&quot;151b9380-01&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@caronte:~# blkid</span><br><span class="line">&#x2F;dev&#x2F;sda1: UUID&#x3D;&quot;d5a0a58e-13bc-46bb-b106-de5219dd7259&quot; TYPE&#x3D;&quot;ext4&quot; PARTUUID&#x3D;&quot;92e8992d-01&quot;</span><br><span class="line">&#x2F;dev&#x2F;sda2: UUID&#x3D;&quot;14fa763f-0861-41c3-ba52-ce25e94e009a&quot; TYPE&#x3D;&quot;ext4&quot; PARTUUID&#x3D;&quot;92e8992d-02&quot;</span><br><span class="line">&#x2F;dev&#x2F;sdb1: UUID&#x3D;&quot;5bd7c629-74af-4714-b3f6-34bab7a988b0&quot; TYPE&#x3D;&quot;ext4&quot; PARTUUID&#x3D;&quot;dd4daff0-c29a-4489-ab93-06e3929e2cad&quot;</span><br><span class="line">&#x2F;dev&#x2F;sdc1: UUID&#x3D;&quot;42123f82-e997-46b6-9dc7-d1d7f521379f&quot; TYPE&#x3D;&quot;ext4&quot; PARTUUID&#x3D;&quot;151b9380-01&quot;</span><br></pre></td></tr></table></figure>
+
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ck5l7bflz000mc9d9fi21odx4" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ckjd2nq2n000p7pd9bxhy8w6a" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -317,7 +327,8 @@
       
         <p>Welcome to my brand new blog!. </p>
 <p>As I pretend to write about technologies I use, I cannot imagine a better way to start:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> _   _      _ _        __        __         _     _ </span><br><span class="line">| | | | ___| | | ___   \ \      / /__  _ __| | __| |</span><br><span class="line">| |_| |/ _ \ | |/ _ \   \ \ /\ / / _ \| &apos;__| |/ _` |</span><br><span class="line">|  _  |  __/ | | (_) |   \ V  V / (_) | |  | | (_| |</span><br><span class="line">|_| |_|\___|_|_|\___/     \_/\_/ \___/|_|  |_|\__,_|</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> _   _      _ _        __        __         _     _ </span><br><span class="line">| | | | ___| | | ___   \ \      &#x2F; &#x2F;__  _ __| | __| |</span><br><span class="line">| |_| |&#x2F; _ \ | |&#x2F; _ \   \ \ &#x2F;\ &#x2F; &#x2F; _ \| &#39;__| |&#x2F; _&#96; |</span><br><span class="line">|  _  |  __&#x2F; | | (_) |   \ V  V &#x2F; (_) | |  | | (_| |</span><br><span class="line">|_| |_|\___|_|_|\___&#x2F;     \_&#x2F;\_&#x2F; \___&#x2F;|_|  |_|\__,_|</span><br></pre></td></tr></table></figure>
+
 <h3 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer:"></a>Disclaimer:</h3><p>I’m a non-english speaker. My spoken english is far to be fluent but I think I can make a good job trying to write it. And it should improve on future, as it’s part of what I want ot do with this new blog. </p>
 <h3 id="What-can-you-find-here"><a href="#What-can-you-find-here" class="headerlink" title="What can you find here?"></a>What can you find here?</h3><p>I’ve been programmer (gwBasic, Clipper, Visual Basic, Perl, Java, Groovy) and systems analyst (or SysOp, SysAdmin, BOFH or whatever you want) since 1985. So I’ll write to whatever I find interesting but always related to technical questions. I have <a href="https://blog.jmiguel.eu" target="_blank" rel="noopener">other blog</a> for personal questions and for some time (maybe some day…) I had another one for aviation information: <a href="http://www.aerotrastornados.com" target="_blank" rel="noopener">aerotrastornados.com</a></p>
 <h3 id="Tagging"><a href="#Tagging" class="headerlink" title="Tagging"></a>Tagging</h3><p>All posts will have some tags. First for language [eng <strong>|</strong> esp]. Next for topic, and I’ll try to keep the list as short as possible: [programming <strong>|</strong> systems <strong>|</strong> java <strong>|</strong> groovy <strong>|</strong> grails <strong>|</strong> linux]</p>
@@ -326,10 +337,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ck5l7bfm9000wc9d9scgmbgy8" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ckjd2nq2r000u7pd91i3h0im1" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/">general</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/" rel="tag">general</a></li></ul>
 
     </footer>
   </div>
@@ -342,7 +353,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
   </nav>
 
 </section>
@@ -356,7 +367,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/" rel="tag">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/" rel="tag">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a></li></ul>
     </div>
   </div>
 
@@ -431,7 +442,7 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="https://jmiguel.eu" class="mobile-nav-link">jmiguel.eu</a>
+    <a href="https://jmiguel.eu" target="_blank" rel="noopener" class="mobile-nav-link">jmiguel.eu</a>
   
 </nav>
     
@@ -439,11 +450,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
 
 
 <script src="/js/script.js"></script>
+
 
 
 

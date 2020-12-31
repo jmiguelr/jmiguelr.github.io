@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
 
@@ -8,17 +8,19 @@
   <title>Restore whole folders from Amazon S3 Glacier | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data.  If you use it for backup, you surely knows the Glacier feature">
-<meta name="keywords" content="eng,linux,aws">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Restore whole folders from Amazon S3 Glacier">
 <meta property="og:url" content="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
 <meta property="og:description" content="Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data.  If you use it for backup, you surely knows the Glacier feature">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-26T16:34:48.005Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-01-05T19:14:31.000Z">
+<meta property="article:modified_time" content="2019-08-26T16:34:48.005Z">
+<meta property="article:author" content="jmiguel rodriguez">
+<meta property="article:tag" content="eng">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="aws">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Restore whole folders from Amazon S3 Glacier">
-<meta name="twitter:description" content="Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data.  If you use it for backup, you surely knows the Glacier feature">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -29,9 +31,11 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
 <body>
   <div id="container">
     <div id="wrap">
@@ -56,7 +60,7 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="https://jmiguel.eu">jmiguel.eu</a>
+          <a class="main-nav-link" href="https://jmiguel.eu" target="_blank" rel="noopener">jmiguel.eu</a>
         
       </nav>
       <nav id="sub-nav">
@@ -101,20 +105,23 @@
 <p>Said that: I needed to restore a full directory with a lot of directories so doing the job one by one wasn’t an option. So I came to <a href="https://stackoverflow.com/questions/20033651/how-to-restore-folders-or-entire-buckets-to-amazon-s3-from-glacier" target="_blank" rel="noopener">this solution on stackOverflow</a> with credits to <a href="http://capnjosh.com/blog/a-client-error-invalidobjectstate-occurred-when-calling-the-copyobject-operation-operation-is-not-valid-for-the-source-objects-storage-class/" target="_blank" rel="noopener">this other blog post</a>. </p>
 <p>I’ve modified the script just a bit because it didn’t work for me (maybe some parameters of aws-cli have changed).  You’ll need the aws cli (Command Line Interface) to do this. </p>
 <p>First of all, we get all <em>Glaciered</em> items on a bucket named here MYBUCKET, substitute it with your own name<br>(please note: I’ve updated it to allow spaces on file or folder names):</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3api list-objects-v2 --bucket MYBUCKET --query &quot;Contents[?StorageClass==&apos;GLACIER&apos;]&quot; --output text | awk &apos;&#123;print substr($0, index($0, $2))&#125;&apos; | awk &apos;&#123;NF-=3&#125;;3&apos; &gt; glacier-restore.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3api list-objects-v2 --bucket MYBUCKET --query &quot;Contents[?StorageClass&#x3D;&#x3D;&#39;GLACIER&#39;]&quot; --output text | awk &#39;&#123;print substr($0, index($0, $2))&#125;&#39; | awk &#39;&#123;NF-&#x3D;3&#125;;3&#39; &gt; glacier-restore.txt</span><br></pre></td></tr></table></figure>
+
 <p>This will get a list with all objects under Glacier rules on your bucket. Maybe you don’t want all of them so this is the moment to edit the <code>glacier-restore.txt</code> file in case you want to fine-tune the files you want to get. </p>
 <p>Then, create (edit + chmod 755) the following script which takes the content of your file an do the restore:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/sh</span><br><span class="line"></span><br><span class="line">cat glacier-restore.txt   | while read x</span><br><span class="line">  do</span><br><span class="line">    echo &quot;Begin restoring $x&quot;</span><br><span class="line">    aws s3api restore-object --restore-request Days=25 --bucket MYBUCKET --key &quot;$x&quot;</span><br><span class="line">    echo &quot;Done restoring $x&quot;</span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line"></span><br><span class="line">cat glacier-restore.txt   | while read x</span><br><span class="line">  do</span><br><span class="line">    echo &quot;Begin restoring $x&quot;</span><br><span class="line">    aws s3api restore-object --restore-request Days&#x3D;25 --bucket MYBUCKET --key &quot;$x&quot;</span><br><span class="line">    echo &quot;Done restoring $x&quot;</span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+
+
 <p>Remember: the process it’s not inmediate. With this command you instruct AWS to restore your files, but it will take between 3 and 5 hours to complete.  You can do it faster (and more expensive) but if you need it so fast you’d maybe should consider standard storage. </p>
 <p>Hope this helps!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="ck5l7bfls000cc9d9hewbeh2a" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="ckjd2nq2a00087pd92fk07xkt" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -153,7 +160,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/" rel="tag">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/" rel="tag">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a></li></ul>
     </div>
   </div>
 
@@ -228,7 +235,7 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="https://jmiguel.eu" class="mobile-nav-link">jmiguel.eu</a>
+    <a href="https://jmiguel.eu" target="_blank" rel="noopener" class="mobile-nav-link">jmiguel.eu</a>
   
 </nav>
     
@@ -236,11 +243,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
 
 
 <script src="/js/script.js"></script>
+
 
 
 

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
 
@@ -8,17 +8,18 @@
   <title>Convert file encoding, bulk way | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
-<meta name="keywords" content="eng,linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Convert file encoding, bulk way">
 <meta property="og:url" content="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
 <meta property="og:description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-20T11:54:35.035Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-20T11:36:45.000Z">
+<meta property="article:modified_time" content="2018-11-20T11:54:35.035Z">
+<meta property="article:author" content="jmiguel rodriguez">
+<meta property="article:tag" content="eng">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Convert file encoding, bulk way">
-<meta name="twitter:description" content="I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almos">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -29,9 +30,11 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
 <body>
   <div id="container">
     <div id="wrap">
@@ -56,7 +59,7 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="https://jmiguel.eu">jmiguel.eu</a>
+          <a class="main-nav-link" href="https://jmiguel.eu" target="_blank" rel="noopener">jmiguel.eu</a>
         
       </nav>
       <nav id="sub-nav">
@@ -96,19 +99,20 @@
       
         <p>I have an old java project, with all files enconded as ISO-8859-1 . It was made back in time where most of our development team worked with Windows (fortunately, those times are over ;-)).  Now (almost 10 years later -yep that is a really <strong>legacy</strong> project-) we’re updating it, mostly in the frontend user interface.</p>
 <p>So, when we started working with it we had a mix of old ISO-8859-1 files and new UTF-8. At some point we decided to change all files encoding to UTF-8. We made some changes using the IntelliJ features for this purpose but it was clear we needed some automatized way to do it, and this is the one-liner way we used:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -name &quot;*.java&quot; -exec file &#123;&#125; \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; do iconv -f ISO-8859-1 -t UTF-8 &lt; $a &gt; /tmp/tmp ; &quot;mv&quot; /tmp/tmp $a ; done</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find -type f -name &quot;*.java&quot; -exec file &#123;&#125; \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; do iconv -f ISO-8859-1 -t UTF-8 &lt; $a &gt; &#x2F;tmp&#x2F;tmp ; &quot;mv&quot; &#x2F;tmp&#x2F;tmp $a ; done</span><br></pre></td></tr></table></figure>
+
 <p>So read it as follows:</p>
 <p>“Find all java files, check which of them are encoded as <em>ISO-whatever</em> and for all of them use the <code>iconv</code> command to create a new correctly encoded file as <code>/tmp/tmp</code> and then move it to the original location”</p>
-<p>Of course: change the <em>“.java”</em> for whatever you need, and maybe it’s a good idea to run it in several steps to see what’s happening.</p>
+<p>Of course: change the *”.java”* for whatever you need, and maybe it’s a good idea to run it in several steps to see what’s happening.</p>
 <p>Run first just the <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO</code> , then something like <code>find -type f -name &quot;*.java&quot; -exec file {} \; | grep ISO | cut -d &quot;:&quot; -f 1  | while read a ; echo &quot;gonna work with $a&quot; ; done</code> so you can be sure you don’t break anything (make a backup first!)</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ck5l7bflg0004c9d9jzc61yki" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ckjd2nq2600057pd9axh51cuo" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -147,7 +151,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/" rel="tag">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/" rel="tag">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a></li></ul>
     </div>
   </div>
 
@@ -222,7 +226,7 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="https://jmiguel.eu" class="mobile-nav-link">jmiguel.eu</a>
+    <a href="https://jmiguel.eu" target="_blank" rel="noopener" class="mobile-nav-link">jmiguel.eu</a>
   
 </nav>
     
@@ -230,11 +234,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
 
 
 <script src="/js/script.js"></script>
+
 
 
 

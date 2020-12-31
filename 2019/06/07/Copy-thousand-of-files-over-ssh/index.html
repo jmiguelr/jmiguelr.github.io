@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
 
@@ -8,17 +8,18 @@
   <title>Copy thousand of files over ssh | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="So… you have to copy several thousand of files and folders from one server to another. And you’re short of disk space, as usual, and you want to be as efficient as possible.  You can use scp -r files">
-<meta name="keywords" content="eng,linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Copy thousand of files over ssh">
 <meta property="og:url" content="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
 <meta property="og:description" content="So… you have to copy several thousand of files and folders from one server to another. And you’re short of disk space, as usual, and you want to be as efficient as possible.  You can use scp -r files">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-07T07:28:07.010Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-06-07T07:01:49.000Z">
+<meta property="article:modified_time" content="2019-06-07T07:28:07.010Z">
+<meta property="article:author" content="jmiguel rodriguez">
+<meta property="article:tag" content="eng">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Copy thousand of files over ssh">
-<meta name="twitter:description" content="So… you have to copy several thousand of files and folders from one server to another. And you’re short of disk space, as usual, and you want to be as efficient as possible.  You can use scp -r files">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -29,9 +30,11 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
 <body>
   <div id="container">
     <div id="wrap">
@@ -56,7 +59,7 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="https://jmiguel.eu">jmiguel.eu</a>
+          <a class="main-nav-link" href="https://jmiguel.eu" target="_blank" rel="noopener">jmiguel.eu</a>
         
       </nav>
       <nav id="sub-nav">
@@ -99,22 +102,26 @@
 <h3 id="ssh-streams-to-the-rescue"><a href="#ssh-streams-to-the-rescue" class="headerlink" title="ssh streams to the rescue"></a>ssh streams to the rescue</h3><p>Maybe you know you can execute commands over ssh. If you do <code>ssh user@host ls</code> what you get it’s the <code>ls</code> on the remote side. Also, you also know there is a underlay stream which ssh uses, for example, in ssh tunnels.</p>
 <p>So, how can you solve the original problem with this tool?.  Easy: create a tar file (maybe ever compressed) on the fly, pipe it through ssh and un-tar it on the other side. It’s MAGIC!  :-)</p>
 <p>Copy from out local host to a remote:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -czf - [files] | ssh user@remoteHost &quot;tar -xzvf - -C /remote/desired/folder&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -czf - [files] | ssh user@remoteHost &quot;tar -xzvf - -C &#x2F;remote&#x2F;desired&#x2F;folder&quot;</span><br></pre></td></tr></table></figure>
+
 <p>Read it:  create (c) as usual a tar file, compressed (z), and the file it’s the standard output (-).  Pipe it thru ssh to <em>remoteHost</em>, and there, execute a tar extract (x), also with compression (z), verbose to see what’s going on (v) with the standard input (-) comming from ssh stream. Change (-C) to the desired remote folder before starting the process on the remote side. </p>
 <p>This is, AFAIK, the best way to do the jobs. Just one step, super-fast, using compression if needed… what else?</p>
 <p>Of course, you can also do it reverse, from server to your host:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remoteHost &quot;tar -cvf - /your/remote/folder&quot; | tar -xvf -</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remoteHost &quot;tar -cvf - &#x2F;your&#x2F;remote&#x2F;folder&quot; | tar -xvf -</span><br></pre></td></tr></table></figure>
+
 <p>You may even create a local tar file from remote files using this way:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remoteHost &quot;tar -cvf - /your/remote/folder&quot; &gt; local.file.tgz</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh user@remoteHost &quot;tar -cvf - &#x2F;your&#x2F;remote&#x2F;folder&quot; &gt; local.file.tgz</span><br></pre></td></tr></table></figure>
+
+
 <p>Cool, isn’t it?</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="ck5l7bfll0006c9d9vkn2qikh" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/07/Copy-thousand-of-files-over-ssh/" data-id="ckjd2nq2d000a7pd99hk41haj" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -153,7 +160,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/" rel="tag">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/" rel="tag">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a></li></ul>
     </div>
   </div>
 
@@ -228,7 +235,7 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="https://jmiguel.eu" class="mobile-nav-link">jmiguel.eu</a>
+    <a href="https://jmiguel.eu" target="_blank" rel="noopener" class="mobile-nav-link">jmiguel.eu</a>
   
 </nav>
     
@@ -236,11 +243,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
 
 
 <script src="/js/script.js"></script>
+
 
 
 

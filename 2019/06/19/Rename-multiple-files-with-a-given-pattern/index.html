@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
 
   
   <title>Rename multiple files with a given pattern | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="You may need to rename several files in a folder following a pattern.Say you have  12345678910jmiguel@monk /tmp/a  $ touch file.1.txtjmiguel@monk /tmp/a  $ touch file.2.txtjmiguel@monk /tmp/a  $ touch">
-<meta name="keywords" content="eng,linux">
+  <meta name="description" content="You may need to rename several files in a folder following a pattern.Say you have  12345678910jmiguel@monk &#x2F;tmp&#x2F;a  $ touch file.1.txtjmiguel@monk &#x2F;tmp&#x2F;a  $ touch file.2.txtjmiguel@">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Rename multiple files with a given pattern">
 <meta property="og:url" content="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
-<meta property="og:description" content="You may need to rename several files in a folder following a pattern.Say you have  12345678910jmiguel@monk /tmp/a  $ touch file.1.txtjmiguel@monk /tmp/a  $ touch file.2.txtjmiguel@monk /tmp/a  $ touch">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-06-19T09:06:27.105Z">
+<meta property="og:description" content="You may need to rename several files in a folder following a pattern.Say you have  12345678910jmiguel@monk &#x2F;tmp&#x2F;a  $ touch file.1.txtjmiguel@monk &#x2F;tmp&#x2F;a  $ touch file.2.txtjmiguel@">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2019-06-19T08:52:35.000Z">
+<meta property="article:modified_time" content="2019-06-19T09:06:27.105Z">
+<meta property="article:author" content="jmiguel rodriguez">
+<meta property="article:tag" content="eng">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Rename multiple files with a given pattern">
-<meta name="twitter:description" content="You may need to rename several files in a folder following a pattern.Say you have  12345678910jmiguel@monk /tmp/a  $ touch file.1.txtjmiguel@monk /tmp/a  $ touch file.2.txtjmiguel@monk /tmp/a  $ touch">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -29,9 +30,11 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
 <body>
   <div id="container">
     <div id="wrap">
@@ -56,7 +59,7 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="https://jmiguel.eu">jmiguel.eu</a>
+          <a class="main-nav-link" href="https://jmiguel.eu" target="_blank" rel="noopener">jmiguel.eu</a>
         
       </nav>
       <nav id="sub-nav">
@@ -95,21 +98,26 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>You may need to rename several files in a folder following a pattern.<br>Say you have </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">jmiguel@monk /tmp/a  $ touch file.1.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.2.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ touch file.3.txt</span><br><span class="line">jmiguel@monk /tmp/a  $ ll</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x  2 jmiguel jmiguel 4096 jun 19 10:54 .</span><br><span class="line">drwxrwxrwt 28 root    root    4096 jun 19 10:54 ..</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.1.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.2.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.3.txt</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">jmiguel@monk &#x2F;tmp&#x2F;a  $ touch file.1.txt</span><br><span class="line">jmiguel@monk &#x2F;tmp&#x2F;a  $ touch file.2.txt</span><br><span class="line">jmiguel@monk &#x2F;tmp&#x2F;a  $ touch file.3.txt</span><br><span class="line">jmiguel@monk &#x2F;tmp&#x2F;a  $ ll</span><br><span class="line">total 8</span><br><span class="line">drwxr-xr-x  2 jmiguel jmiguel 4096 jun 19 10:54 .</span><br><span class="line">drwxrwxrwt 28 root    root    4096 jun 19 10:54 ..</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.1.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.2.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 file.3.txt</span><br></pre></td></tr></table></figure>
+
+
 <p>And you want to get </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 newname.1.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 newname.2.txt</span><br><span class="line">-rw-r--r--  1 jmiguel jmiguel    0 jun 19 10:54 newname.3.txt</span><br></pre></td></tr></table></figure>
+
 <p>You can do a loop, string substitution… a mess. Or you can use the <code>rename</code> command in this way:</p>
 <p><code>rename &#39;s/file/ppillo/g&#39; *</code></p>
 <p>Note than rename is a shell script made with perl, so maybe it’s not available on your operating system (mint and ubuntu have it) but if you have perl you can just copy and paste de following code to create your own <code>rename</code> version.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"></span><br><span class="line">use strict;</span><br><span class="line">use File::Rename ();</span><br><span class="line">use Pod::Usage;</span><br><span class="line"></span><br><span class="line">main() unless caller;</span><br><span class="line"></span><br><span class="line">sub main &#123;</span><br><span class="line">    my $options = File::Rename::Options::GetOptions</span><br><span class="line">        or pod2usage;</span><br><span class="line"></span><br><span class="line">    mod_version() if $options-&gt;&#123;show_version&#125;;</span><br><span class="line">    pod2usage( -verbose =&gt; 2 ) if $options-&gt;&#123;show_manual&#125;;</span><br><span class="line">    pod2usage( -exitval =&gt; 1 ) if $options-&gt;&#123;show_help&#125;;</span><br><span class="line"></span><br><span class="line">    @ARGV = map &#123;glob&#125; @ARGV if $^O =~ m&#123;Win&#125;msx;</span><br><span class="line"></span><br><span class="line">    File::Rename::rename(\@ARGV, $options);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sub mod_version &#123;</span><br><span class="line">    print __FILE__ .</span><br><span class="line">  &apos; using File::Rename version &apos;.</span><br><span class="line">        $File::Rename::VERSION .&quot;\n\n&quot;;</span><br><span class="line">    exit 0</span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">1;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">#</span><br><span class="line"></span><br><span class="line">use strict;</span><br><span class="line">use File::Rename ();</span><br><span class="line">use Pod::Usage;</span><br><span class="line"></span><br><span class="line">main() unless caller;</span><br><span class="line"></span><br><span class="line">sub main &#123;</span><br><span class="line">    my $options &#x3D; File::Rename::Options::GetOptions</span><br><span class="line">        or pod2usage;</span><br><span class="line"></span><br><span class="line">    mod_version() if $options-&gt;&#123;show_version&#125;;</span><br><span class="line">    pod2usage( -verbose &#x3D;&gt; 2 ) if $options-&gt;&#123;show_manual&#125;;</span><br><span class="line">    pod2usage( -exitval &#x3D;&gt; 1 ) if $options-&gt;&#123;show_help&#125;;</span><br><span class="line"></span><br><span class="line">    @ARGV &#x3D; map &#123;glob&#125; @ARGV if $^O &#x3D;~ m&#123;Win&#125;msx;</span><br><span class="line"></span><br><span class="line">    File::Rename::rename(\@ARGV, $options);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sub mod_version &#123;</span><br><span class="line">    print __FILE__ .</span><br><span class="line">  &#39; using File::Rename version &#39;.</span><br><span class="line">        $File::Rename::VERSION .&quot;\n\n&quot;;</span><br><span class="line">    exit 0</span><br><span class="line">&#125;   </span><br><span class="line"></span><br><span class="line">1;</span><br></pre></td></tr></table></figure>
+
+
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="ck5l7bflp0009c9d9jsp73wzq" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/06/19/Rename-multiple-files-with-a-given-pattern/" data-id="ckjd2nq2i000h7pd9h9g702sw" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
 
     </footer>
   </div>
@@ -148,7 +156,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/" rel="tag">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/" rel="tag">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a></li></ul>
     </div>
   </div>
 
@@ -223,7 +231,7 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="https://jmiguel.eu" class="mobile-nav-link">jmiguel.eu</a>
+    <a href="https://jmiguel.eu" target="_blank" rel="noopener" class="mobile-nav-link">jmiguel.eu</a>
   
 </nav>
     
@@ -231,11 +239,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
 
 
 <script src="/js/script.js"></script>
+
 
 
 

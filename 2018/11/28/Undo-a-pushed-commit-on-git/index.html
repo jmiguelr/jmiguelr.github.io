@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
 
@@ -8,17 +8,18 @@
   <title>Undo a pushed commit on git | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="We all know it. Shit happens. Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what">
-<meta name="keywords" content="eng,git">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Undo a pushed commit on git">
 <meta property="og:url" content="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
 <meta property="og:description" content="We all know it. Shit happens. Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-11-28T10:31:29.789Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-28T10:08:49.000Z">
+<meta property="article:modified_time" content="2018-11-28T10:31:29.789Z">
+<meta property="article:author" content="jmiguel rodriguez">
+<meta property="article:tag" content="eng">
+<meta property="article:tag" content="git">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Undo a pushed commit on git">
-<meta name="twitter:description" content="We all know it. Shit happens. Today, I screw a small piece of code ( thank you SonarLint! ;-) (*)).  It was just a small optimization, but after checking with a coworker the code we couldn’t find what">
 <meta name="twitter:creator" content="@jmiguel">
   
     <link rel="alternate" href="/rss.xml" title="Tech Thoughts" type="application/atom+xml">
@@ -29,9 +30,11 @@
   
     <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
-  <link rel="stylesheet" href="/css/style.css">
-</head>
-</html>
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
 <body>
   <div id="container">
     <div id="wrap">
@@ -56,7 +59,7 @@
         
           <a class="main-nav-link" href="/archives">Archives</a>
         
-          <a class="main-nav-link" href="https://jmiguel.eu">jmiguel.eu</a>
+          <a class="main-nav-link" href="https://jmiguel.eu" target="_blank" rel="noopener">jmiguel.eu</a>
         
       </nav>
       <nav id="sub-nav">
@@ -100,8 +103,10 @@
 <p>So finally I found (<a href="https://stackoverflow.com/questions/4114095/how-to-revert-a-git-repository-to-a-previous-commit" target="_blank" rel="noopener">stackoverflow at rescue</a>) this solution which help <strong>in my case</strong>.  Be careful: my problem may be different than yours and so the solution. Even more, the solution I used it’s not the choosen as the best on previous link.</p>
 <p>I had the following git history</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">commit 2071cf3cb8</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:16:48 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 5ff2c4a3a1</span><br><span class="line">Author: xxxxx</span><br><span class="line">Date:   Wed Nov 28 10:11:06 2018 +0100</span><br><span class="line"></span><br><span class="line">commit 3a37cbc8e7</span><br><span class="line">Author: yyyyy</span><br><span class="line">Date:   Wed Nov 28 09:58:33 2018 +0100</span><br></pre></td></tr></table></figure>
+
 <p>The two top commits was mine, and was wrong. I wanted to go back to 3a37cbc8e7 so I use the following sequence:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Resets index to former commit; replace &apos;3a37cbc8e7&apos; with your commit code</span><br><span class="line">git reset 3a37cbc8e7</span><br><span class="line"></span><br><span class="line"># Moves pointer back to previous HEAD</span><br><span class="line">git reset --soft HEAD@&#123;1&#125;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;Revert commit to the past&quot;</span><br><span class="line"></span><br><span class="line"># Updates working copy to reflect the new commit</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Resets index to former commit; replace &#39;3a37cbc8e7&#39; with your commit code</span><br><span class="line">git reset 3a37cbc8e7</span><br><span class="line"></span><br><span class="line"># Moves pointer back to previous HEAD</span><br><span class="line">git reset --soft HEAD@&#123;1&#125;</span><br><span class="line"></span><br><span class="line">git commit -m &quot;Revert commit to the past&quot;</span><br><span class="line"></span><br><span class="line"># Updates working copy to reflect the new commit</span><br><span class="line">git reset --hard</span><br></pre></td></tr></table></figure>
+
 <p>Here is the point where you’re back to the commit you wanted to be. Check it. If you’re satisfied, just push it.</p>
 <p>And additional benefit with this approach is that you don’t loose your history: there will be ever a culprit (myself, in this case) written on the chain.</p>
 <p>Hope this helps.</p>
@@ -110,10 +115,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ck5l7bfm7000tc9d9iya8cibu" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ckjd2nq2t000w7pd9egprdnsc" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
 
     </footer>
   </div>
@@ -152,7 +157,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/">vmware</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/esxi/" rel="tag">esxi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/general/" rel="tag">general</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/html/" rel="tag">html</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/" rel="tag">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vmware/" rel="tag">vmware</a></li></ul>
     </div>
   </div>
 
@@ -227,7 +232,7 @@
   
     <a href="/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="https://jmiguel.eu" class="mobile-nav-link">jmiguel.eu</a>
+    <a href="https://jmiguel.eu" target="_blank" rel="noopener" class="mobile-nav-link">jmiguel.eu</a>
   
 </nav>
     
@@ -235,11 +240,17 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
 
 
 <script src="/js/script.js"></script>
+
 
 
 
