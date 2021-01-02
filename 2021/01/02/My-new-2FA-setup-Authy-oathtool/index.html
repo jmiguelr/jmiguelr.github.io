@@ -5,14 +5,20 @@
   
 
   
-  <title>Archives | Tech Thoughts</title>
+  <title>My new 2FA setup - Authy + oathtool | Tech Thoughts</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Tech Thoughts">
-<meta property="og:url" content="http://jmiguelr.github.io/archives/page/2/index.html">
+  <meta name="description" content="So long!.  I know, 2020 has been such a strange year. For me, it also was the first time (yes, in my life) I switched to another company. Coming from being self-employed on my own company, it was a gr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My new 2FA setup - Authy + oathtool">
+<meta property="og:url" content="http://jmiguelr.github.io/2021/01/02/My-new-2FA-setup-Authy-oathtool/index.html">
 <meta property="og:site_name" content="Tech Thoughts">
+<meta property="og:description" content="So long!.  I know, 2020 has been such a strange year. For me, it also was the first time (yes, in my life) I switched to another company. Coming from being self-employed on my own company, it was a gr">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-01-02T10:23:58.000Z">
+<meta property="article:modified_time" content="2021-01-02T11:47:17.101Z">
 <meta property="article:author" content="jmiguel rodriguez">
+<meta property="article:tag" content="eng">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:creator" content="@jmiguel">
   
@@ -69,169 +75,67 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" class="archive-article-date">
-  <time datetime="2019-01-05T19:14:31.000Z" itemprop="datePublished">Jan 5</time>
+        <section id="main"><article id="post-My-new-2FA-setup-Authy-oathtool" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/01/02/My-new-2FA-setup-Authy-oathtool/" class="article-date">
+  <time datetime="2021-01-02T10:23:58.000Z" itemprop="datePublished">2021-01-02</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/">Restore whole folders from Amazon S3 Glacier</a>
+    <h1 class="article-title" itemprop="name">
+      My new 2FA setup - Authy + oathtool
     </h1>
   
 
-    </header>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>So long!.  I know, 2020 has been such a strange year. For me, it also was the first time (yes, in my life) I switched to another company. Coming from being self-employed on my own company, it was a great change but I’m really happy about that change. Even I’ve been forced to keep my mind fully in focus for work. </p>
+<p>Anyway: I want to talk about my new security setup for internet applications. I had some spare time and a huge To-Do list but this was one of my top priorities. I’ve been using 2-factor authentication (2FA) for some time with the <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=es&gl=US" target="_blank" rel="noopener">Google Authenticator</a> android application.  But I was not fully satisfied with it. </p>
+<p>Sometimes I want to authenticate on desktop applications and I’d like to be able to do it from my computer. But I’d also like to be in sync with the phone application. Or just be free to know the seed for any service I use to feel it as <em>mine</em> (I could reuse the bitcoin <em>motto</em> “not your keys, not your coins” here).</p>
+<p>Also, I was using the <a href="https://jmiguelr.github.io/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/">HyperFido keys I wrote about</a> in just two places, so I wanted to extend the use. </p>
+<p>So: first move was to find a replacement for the mobile app with enough freedom and I choose <a href="https://authy.com/" target="_blank" rel="noopener">Authy</a>. It also has some cloud sync utilities I don’t plan to use. I just want to keep my seeds for the sites I use (and also a good improvement: password protected beyond the mobile protection). </p>
+<p>Second: find a way to get the 2FA tokens (One-Time Passwords, OTP) on Linux. As easy as <code>sudo apt install oathtool</code> . With this small tool you can get your One-Time Passwords easily. </p>
+<p>So, the final step was going for every important service I use and change the security setup. Some of them (Firefox, Dropbox) forces you to remove all 2FA previous setup before starts with a new one. Others (Google) will let you change only what you need (so you don’t need to re-register your Fido keys if you just want to change your OTP setup).</p>
+<p>In all the cases the procedure is very similar: the site you register will allow you both scans a QR-code or manually enter a chain of letters (usually 6 groups of 4 letters each, sometimes more or fewer letters).  This is your seed for that site. Keep it safe and secret (my choice is to save it on keepass, together with the real password for that site).  </p>
+<p>Now you can use that string on Authy to add your site on your mobile device. Even while Authy has that option, I prefer not to upload my seeds to their cloud, but it’s up to you. I understand it’s a good way to have the codes in sync for several devices, or just for having a backup of the seeds, but I don’t need it (and I don’t like it)</p>
+<p>And of course, the last piece for having generated OTP on Linux is <code>oathtool</code> on command line. Just type </p>
+<pre><code>oathtool --base32 --totp abcdefghijklmnopqrstuvwxyz</code></pre><p>(obviously, with your real seed code) to get the OTP you need to login. </p>
+<p>Is this a perfect solution?. For sure, It isn’t. I’m not fully satisfied having in the same place both the password for the site and the 2AF seed. I could have two keepass different files but I don’t feel it as a need right now. </p>
+<p>Also: I’m using this OTP system as a backup for the preferred 2FA way: the physical Fido keys. After almost one year of using them I can conclude they are a very good way to get authenticated. I own 2 Fido keys so I can have one of them always with me and the other on a safe place as backup. Not every site allows to have several keys (cannot understand why, I hope it will eventually fix it)</p>
+<p>Well, that’s all!.  I hope this system for keeping your accounts more secure helps you.  As long as right now there’s no comments system available for this site, tell me whatever you think about this setup via Twitter: <a href="https://twitter.com/jmiguel" target="_blank" rel="noopener">@jmiguel</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2021/01/02/My-new-2FA-setup-Authy-oathtool/" data-id="ckjfn7ck20004wqd98dmnear9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Getting Hyperfido U2F keys working on Linux (Ubuntu or Mint)</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-      
-        </div></section>
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" class="archive-article-date">
-  <time datetime="2018-11-28T10:08:49.000Z" itemprop="datePublished">Nov 28</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/28/Undo-a-pushed-commit-on-git/">Undo a pushed commit on git</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/20/Convert-file-encoding-bulk-way/" class="archive-article-date">
-  <time datetime="2018-11-20T11:36:45.000Z" itemprop="datePublished">Nov 20</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/20/Convert-file-encoding-bulk-way/">Convert file encoding, bulk way</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/11/12/Error-actualizando-docker-mint-18/" class="archive-article-date">
-  <time datetime="2018-11-12T14:58:40.000Z" itemprop="datePublished">Nov 12</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/11/12/Error-actualizando-docker-mint-18/">Error actualizando docker (mint 18)</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/10/22/Several-submit-actions-in-one-form/" class="archive-article-date">
-  <time datetime="2018-10-22T20:18:58.000Z" itemprop="datePublished">Oct 22</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/10/22/Several-submit-actions-in-one-form/">Several submit actions in one form</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/18/Show-block-id-on-Linux-devices/" class="archive-article-date">
-  <time datetime="2018-09-18T09:01:27.000Z" itemprop="datePublished">Sep 18</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/18/Show-block-id-on-Linux-devices/">Show block id on Linux devices</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2018/09/06/first-post/" class="archive-article-date">
-  <time datetime="2018-09-06T21:50:56.000Z" itemprop="datePublished">Sep 6</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/09/06/first-post/">My Hello World</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/">&amp;laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-  </nav>
 
 </section>
         

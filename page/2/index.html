@@ -71,6 +71,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Restore-whole-folders-from-Amazon-S3-Glacier" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" class="article-date">
+  <time datetime="2019-01-05T19:14:31.000Z" itemprop="datePublished">2019-01-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/">Restore whole folders from Amazon S3 Glacier</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Amazon Web Service it’s an incredible tool. And S3 it’s one of the best ways for storing your data and, of course, backups of your data. </p>
+<p>If you use it for backup, you surely knows the Glacier feature: you can <em>freeze</em> your data getting a lower price… in money. Because the price you pay it’s that your data ain’t available immediatly when you need it, you have to wait to <em>restore</em> it before you can get it. </p>
+<p>But a maybe worst issue is that you can’t restore a full folder. You only can restore files. So if you want to <em>un-Glacier</em> a folder you have to traverse all tree of folders, and check all individual files you want. One by one. </p>
+<p>Althougt this sounds (and it is!) weird, it’s related with the way AWS S3 <em>sees</em> your files: there are no folders. A folder it’s just a visual representation of structure of files (using / as separator). But for S3 <strong>everything</strong> is a file.</p>
+<p>Said that: I needed to restore a full directory with a lot of directories so doing the job one by one wasn’t an option. So I came to <a href="https://stackoverflow.com/questions/20033651/how-to-restore-folders-or-entire-buckets-to-amazon-s3-from-glacier" target="_blank" rel="noopener">this solution on stackOverflow</a> with credits to <a href="http://capnjosh.com/blog/a-client-error-invalidobjectstate-occurred-when-calling-the-copyobject-operation-operation-is-not-valid-for-the-source-objects-storage-class/" target="_blank" rel="noopener">this other blog post</a>. </p>
+<p>I’ve modified the script just a bit because it didn’t work for me (maybe some parameters of aws-cli have changed).  You’ll need the aws cli (Command Line Interface) to do this. </p>
+<p>First of all, we get all <em>Glaciered</em> items on a bucket named here MYBUCKET, substitute it with your own name<br>(please note: I’ve updated it to allow spaces on file or folder names):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">aws s3api list-objects-v2 --bucket MYBUCKET --query &quot;Contents[?StorageClass&#x3D;&#x3D;&#39;GLACIER&#39;]&quot; --output text | awk &#39;&#123;print substr($0, index($0, $2))&#125;&#39; | awk &#39;&#123;NF-&#x3D;3&#125;;3&#39; &gt; glacier-restore.txt</span><br></pre></td></tr></table></figure>
+
+<p>This will get a list with all objects under Glacier rules on your bucket. Maybe you don’t want all of them so this is the moment to edit the <code>glacier-restore.txt</code> file in case you want to fine-tune the files you want to get. </p>
+<p>Then, create (edit + chmod 755) the following script which takes the content of your file an do the restore:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;bin&#x2F;sh</span><br><span class="line"></span><br><span class="line">cat glacier-restore.txt   | while read x</span><br><span class="line">  do</span><br><span class="line">    echo &quot;Begin restoring $x&quot;</span><br><span class="line">    aws s3api restore-object --restore-request Days&#x3D;25 --bucket MYBUCKET --key &quot;$x&quot;</span><br><span class="line">    echo &quot;Done restoring $x&quot;</span><br><span class="line">  done</span><br></pre></td></tr></table></figure>
+
+
+<p>Remember: the process it’s not inmediate. With this command you instruct AWS to restore your files, but it will take between 3 and 5 hours to complete.  You can do it faster (and more expensive) but if you need it so fast you’d maybe should consider standard storage. </p>
+<p>Hope this helps!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="ckjfn7ck50007wqd95nv9fjlw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Undo-a-pushed-commit-on-git" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/11/28/Undo-a-pushed-commit-on-git/" class="article-date">
@@ -111,7 +165,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ckjd2sp3p000t7md9byrw5k6j" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ckjfn7ckk000uwqd9ew3y8zaw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
@@ -157,7 +211,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ckjd2sp3100027md93jld2dur" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ckjfn7ck30005wqd95riy0vxp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -205,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ckjd2sp3800067md92skxb67r" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ckjfn7ck8000awqd939957trt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -248,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ckjd2sp3j000j7md9fqji5kao" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ckjfn7ckd000kwqd97nxbh2hy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/" rel="tag">html</a></li></ul>
@@ -291,7 +345,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ckjd2sp3l000m7md9btq20l88" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ckjfn7ckh000pwqd9dl0g6cyr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -337,7 +391,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ckjd2sp3r000w7md9bl8r64cv" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ckjfn7ckm000zwqd94yu1hggf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/" rel="tag">general</a></li></ul>
@@ -386,7 +440,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -397,6 +451,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/01/02/My-new-2FA-setup-Authy-oathtool/">My new 2FA setup - Authy + oathtool</a>
+          </li>
         
           <li>
             <a href="/2020/01/19/Getting-Hyperfido-U2F-keys-working-on-Linux-Ubuntu-or-Mint/">Getting Hyperfido U2F keys working on Linux (Ubuntu or Mint)</a>
@@ -414,10 +472,6 @@
             <a href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/">Rename multiple files with a given pattern</a>
           </li>
         
-          <li>
-            <a href="/2019/06/07/Copy-thousand-of-files-over-ssh/">Copy thousand of files over ssh</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -430,7 +484,7 @@
   
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2020 jmiguel rodriguez<br>
+      &copy; 2021 jmiguel rodriguez<br>
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
