@@ -27,7 +27,7 @@
   
 <link rel="stylesheet" href="/css/style.css">
 
-<meta name="generator" content="Hexo 4.2.0"></head>
+<meta name="generator" content="Hexo 4.2.1"></head>
 
 <body>
   <div id="container">
@@ -71,6 +71,54 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-The-fastest-way-to-count-columns-in-shell-AWK" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" class="article-date">
+  <time datetime="2019-02-03T16:10:24.000Z" itemprop="datePublished">2019-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/">The fastest way to count columns in shell: AWK</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Say you have (as I do) a file <code>/tmp/myFile.txt</code> containing a list of unrelated folders with their size, as follows:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">7220    X03066659D&#x2F;txt&#x2F;20150109</span><br><span class="line">1365    A30266659D&#x2F;txt&#x2F;20150112</span><br><span class="line">9       X30626659D&#x2F;txt&#x2F;20150121</span><br><span class="line">0       X30663659D&#x2F;xml&#x2F;20150102</span><br><span class="line">5292    A30646659D&#x2F;xml&#x2F;20150105</span><br><span class="line">10872   X30Q66659D&#x2F;xml&#x2F;20150107</span><br><span class="line">7384    A30A66659D&#x2F;xml&#x2F;20150108</span><br></pre></td></tr></table></figure>
+
+<p>And you want to sum the first column of every line to know the total. <strong>AWK</strong> at rescue!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;&#123;sum +&#x3D; $1&#125; END &#123;print sum&#125; &#x2F;tmp&#x2F;myFile.txt&#39;</span><br></pre></td></tr></table></figure>
+
+<p>If there were a discriminant you would like to use (imagine you only need those starting with <code>A</code> on second column) you can filter on AWK line (no need to grep)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk &#39;$2 ~ &#x2F;^A&#x2F; &#123;sum +&#x3D; $1&#125; END &#123;print sum&#125;&#39; &#x2F;tmp&#x2F;myFile.txt</span><br></pre></td></tr></table></figure>
+
+
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://jmiguelr.github.io/2019/02/03/The-fastest-way-to-count-columns-in-shell-AWK/" data-id="ckn3bylv5000vchd91d06f4kf" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Restore-whole-folders-from-Amazon-S3-Glacier" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" class="article-date">
@@ -113,7 +161,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="ckjg7mkku000q5pd9g5y4c3ua" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2019/01/05/Restore-whole-folders-from-Amazon-S3-Glacier/" data-id="ckn3bylv2000ochd94kethvku" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aws/" rel="tag">aws</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -165,7 +213,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ckjg7mkkz000x5pd986znb12p" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/28/Undo-a-pushed-commit-on-git/" data-id="ckn3bylv7000ychd94pq89mcl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/" rel="tag">git</a></li></ul>
@@ -211,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ckjg7mkk800035pd96r662slj" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/20/Convert-file-encoding-bulk-way/" data-id="ckn3bylum0005chd97d36f9pg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -259,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ckjg7mkkh00085pd9a6qpgnor" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/11/12/Error-actualizando-docker-mint-18/" data-id="ckn3bylur000bchd95g3fels8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/docker/" rel="tag">docker</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/esp/" rel="tag">esp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -302,7 +350,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ckjg7mkkp000l5pd96ps79jcc" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/10/22/Several-submit-actions-in-one-form/" data-id="ckn3bylv0000lchd97w24b48w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/" rel="tag">html</a></li></ul>
@@ -345,7 +393,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ckjg7mkks000n5pd9gqxvddr7" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/18/Show-block-id-on-Linux-devices/" data-id="ckn3bylv3000qchd9ai9y9jko" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/" rel="tag">linux</a></li></ul>
@@ -391,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ckjg7mkl100105pd99tdj4op7" class="article-share-link">Share</a>
+      <a data-url="http://jmiguelr.github.io/2018/09/06/first-post/" data-id="ckn3bylv70010chd9h9eiby83" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/eng/" rel="tag">eng</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/general/" rel="tag">general</a></li></ul>
@@ -440,7 +488,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/01/">January 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/05/">May 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/01/">January 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/09/">September 2018</a></li></ul>
     </div>
   </div>
 
@@ -451,6 +499,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2021/04/04/A_new_home/">New home, this blog has been migrated</a>
+          </li>
         
           <li>
             <a href="/2021/01/02/My-new-2FA-setup-Authy-oathtool/">My new 2FA setup - Authy + oathtool</a>
@@ -466,10 +518,6 @@
         
           <li>
             <a href="/2019/09/12/Add-a-new-ssh-authorized-key-to-a-remote-host-in-one-single-line/">Add a new ssh authorized key to a remote host... in one single line</a>
-          </li>
-        
-          <li>
-            <a href="/2019/06/19/Rename-multiple-files-with-a-given-pattern/">Rename multiple files with a given pattern</a>
           </li>
         
       </ul>

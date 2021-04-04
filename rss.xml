@@ -8,8 +8,27 @@
     <atom:link href="/rss.xml" rel="self" type="application/rss+xml"/>
     
     <description></description>
-    <pubDate>Sat, 02 Jan 2021 12:07:37 GMT</pubDate>
+    <pubDate>Sun, 04 Apr 2021 15:37:27 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>New home, this blog has been migrated</title>
+      <link>http://jmiguelr.github.io/2021/04/04/A_new_home/</link>
+      <guid>http://jmiguelr.github.io/2021/04/04/A_new_home/</guid>
+      <pubDate>Sun, 04 Apr 2021 15:30:30 GMT</pubDate>
+      <description>
+      
+        
+        
+          
+        
+      
+      </description>
+      
+      <content:encoded><![CDATA[<p>That’s it. I haven’t write too much but anyway I’ve migrated all content<br>here to a new place, in a self hosted site made with <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a> instead of<br><a href="https://hexo.io" target="_blank" rel="noopener">Hexo</a> as I was using. This way I can remove <code>npm</code> from my computer and<br>the whole update process is much simpler than before. </p><p>You’re welcome if you want to read me in the new <a href="https://techiethings.jmiguel.eu" target="_blank" rel="noopener">Techie Things</a></p><p>See ya!</p>]]></content:encoded>
+      
+      <comments>http://jmiguelr.github.io/2021/04/04/A_new_home/#disqus_thread</comments>
+    </item>
     
     <item>
       <title>My new 2FA setup - Authy + oathtool</title>
